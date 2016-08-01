@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/ivMsgFromLogo"
+        android:layout_width="@dimen/widget_big"
+        android:layout_height="@dimen/widget_big"
+        android:layout_marginBottom="@dimen/padding_default"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_marginTop="@dimen/padding_default"
+        android:background="@color/light_gray"
+        android:src="@drawable/ic_photo_loading"
+        />
+
+    <TextView
+        android:id="@+id/tvMsgFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_marginTop="@dimen/padding_default"
+        android:layout_toEndOf="@+id/ivMsgFromLogo"
+        android:layout_toRightOf="@+id/ivMsgFromLogo"
+        android:maxLines="1"
+        android:text="68412356"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <TextView
+        android:id="@+id/tvMsgAbstract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMsgFrom"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_toEndOf="@+id/ivMsgFromLogo"
+        android:layout_toRightOf="@+id/ivMsgFromLogo"
+        android:maxLines="2"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/tvMsgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvMsgFrom"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/padding_default"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+</RelativeLayout>

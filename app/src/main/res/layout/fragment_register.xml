@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_login"
+                android:padding="@dimen/activity_horizontal_margin"
+                tools:context="cn.upfinder.upfinder.Fragment.RegisterFragment"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        >
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            style="@style/SingleLogo"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_logo"
+            android:src="@mipmap/ic_launcher"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivLogo"
+            android:layout_marginTop="@dimen/height_small"
+            android:background="@drawable/bg_white_1px_gray_border"
+            >
+
+            <EditText
+                android:id="@+id/etRegisterCount"
+                style="@style/EditTextSingle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_default"
+                android:hint="@string/user_count"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tilCount"
+            android:background="@drawable/bg_white_1px_gray_border"
+            >
+
+            <EditText
+                android:id="@+id/etregisterPwd"
+                style="@style/EditTextSingle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_default"
+                android:hint="@string/user_pwd"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPwdConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tilPwd"
+            android:background="@drawable/bg_white_1px_gray_border"
+            >
+
+            <EditText
+                android:id="@+id/etRegisterPwdConfirm"
+                style="@style/EditTextSingle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_default"
+                android:hint="@string/user_pwd_confirm"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            style="@style/ButtonSingle"
+            android:layout_below="@id/tilPwdConfirm"
+            android:layout_marginTop="@dimen/height_small"
+            android:background="@color/colorPrimary"
+            android:text="@string/register"
+            android:textColor="@color/white_default"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvHaveCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/padding_default"
+        android:gravity="center"
+        android:padding="@dimen/padding_default"
+        android:text="@string/have_count"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_default"/>
+
+    <android.support.v4.widget.ContentLoadingProgressBar
+        android:id="@+id/pbRegister"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        />
+
+</RelativeLayout>

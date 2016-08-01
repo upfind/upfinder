@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.upfinder.upfinder.Activity.HomeActivity">
+
+    <cn.upfinder.upfinder.Widget.NoScrollViewPager
+        android:id="@+id/vpHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tlHome"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_big"
+        android:layout_alignParentBottom="true"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/text_gray"
+        app:tabTextAppearance="?android:attr/textAppearanceSmall"
+        android:background="@drawable/bg_white_1px_gray_border"
+        android:paddingTop="@dimen/space_small"
+        android:paddingBottom="@dimen/space_small"
+        />
+
+</RelativeLayout>

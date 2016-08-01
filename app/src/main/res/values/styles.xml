@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <!--图片相关-->
+    <style name="SingleLogo">
+        <item name="android:padding">@dimen/padding_default</item>
+        <item name="android:layout_height">@dimen/single_logo_img</item>
+        <item name="android:layout_width">@dimen/single_logo_img</item>
+    </style>
+
+    <style name="BaseImageView">
+        <item name="android:padding">@dimen/space_small</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="AlertImageView" parent="BaseImageView">
+        <item name="android:layout_width">@dimen/widget_large</item>
+        <item name="android:layout_height">@dimen/widget_large</item>
+    </style>
+
+    <!--TextView相关-->
+    <style name="BaseTextView">
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:padding">@dimen/space_small</item>
+    </style>
+
+    <style name="AlertTextView" parent="BaseTextView">
+        <item name="android:layout_marginTop">@dimen/padding_default</item>
+        <item name="android:textSize">@dimen/text_big</item>
+    </style>
+
+    <!--EditText相关-->
+    <style name="BaseEditText">
+        <item name="android:textColorHint">@color/text_gray</item>
+        <item name="android:textColor">@color/text_default</item>
+
+    </style>
+
+    <style name="EditTextSingle" parent="BaseEditText">
+        <item name="android:background">@color/white_default</item>
+        <item name="android:padding">@dimen/padding_default</item>
+    </style>
+
+    <!--Button相关-->
+    <style name="BaseButton">
+        <item name="android:padding">@dimen/padding_default</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ButtonSingle" parent="BaseButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_default</item>
+        <item name="android:textSize">@dimen/text_big</item>
+    </style>
+</resources>

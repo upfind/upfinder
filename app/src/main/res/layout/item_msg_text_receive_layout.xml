@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_gray"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_default"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    >
+
+    <TextView
+        android:id="@+id/tvMsgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/text_gray"
+        android:padding="@dimen/space_small"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_small"
+        android:layout_marginTop="@dimen/padding_default">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/height_default"
+            android:layout_height="@dimen/height_default"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_photo_loading"/>
+
+        <TextView
+            android:id="@+id/tvMsgContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_small"
+            android:layout_toRightOf="@id/ivAvatar"
+            android:background="@drawable/img_msg_pop_left"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="left|center"
+            android:lineSpacingExtra="@dimen/space_small"
+            android:maxWidth="225.0dip"
+            android:minHeight="@dimen/height_small"
+            android:minWidth="80dp"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingLeft="@dimen/space_large"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/padding_default"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

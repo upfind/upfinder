@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/space_small"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/space_small"
+    >
+
+    <ImageView
+        android:id="@+id/ivUserLogo"
+        android:layout_width="@dimen/widget_big"
+        android:layout_height="@dimen/widget_big"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_toEndOf="@+id/ivUserLogo"
+        android:layout_toRightOf="@+id/ivUserLogo"
+        android:maxEms="10"
+        android:maxLines="1"
+        android:text="Large Texthenchuang henshaunv"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+
+    <TextView
+        android:id="@+id/tvUserSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_marginTop="@dimen/space_small"
+        android:layout_toRightOf="@+id/ivUserLogo"
+        android:maxLines="2"
+        android:text="Medium Text很多狠毒扥花llla nbd jjaikaikj kijaisaka anhifja kjaifjiacakjfia kjaijamckajif"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+</RelativeLayout>

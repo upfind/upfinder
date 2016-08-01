@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_default"
+    android:paddingTop="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/tvMsgTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/text_gray"
+        android:padding="@dimen/space_small"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/space_small"
+        android:layout_marginTop="@dimen/padding_default">
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/widget_big"
+            android:layout_height="@dimen/widget_big"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_photo_loading"/>
+
+        <TextView
+            android:id="@+id/tvMsgContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_small"
+            android:layout_toLeftOf="@id/ivAvatar"
+            android:background="@drawable/img_msg_pop_right"
+            android:gravity="left|center"
+            android:lineSpacingExtra="@dimen/space_mini"
+            android:maxWidth="225.0dip"
+            android:minHeight="@dimen/height_default"
+            android:minWidth="80dp"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingLeft="@dimen/space_big"
+            android:paddingRight="@dimen/space_large"
+            android:paddingTop="@dimen/padding_default"/>
+
+        <ImageView
+            android:id="@+id/ivMsgFailResend"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/tvMsgContent"
+            android:clickable="true"
+            android:contentDescription="settings"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_chat_fail_resend"
+            android:visibility="invisible"
+            />
+
+        <TextView
+            android:id="@+id/tvSendStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/tvMsgContent"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            />
+
+        <ProgressBar
+            android:id="@+id/pbMsgLoad"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/tvMsgContent"
+            android:visibility="visible"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
