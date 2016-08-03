@@ -50,6 +50,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private BmobIMConversation conversation;
     private Context context;
 
+    private OnRecyclerViewListener onRecyclerViewListener;
+
     /**
      * 显示时间间隔:10分钟
      */
@@ -58,7 +60,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public ChatAdapter(Context context, BmobIMConversation conversation) {
         try {
-            currentUid = BmobUser.getCurrentUser().getObjectId();
+            currentUid = BmobUser.getCurrentUser(context).getObjectId();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,6 +90,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         }
         return position;
+    }
+
+    public void setOnRecyclerViewListener(OnRecyclerViewListener onRecyclerViewListener) {
+        this.onRecyclerViewListener = onRecyclerViewListener;
     }
 
     public int getCount() {
@@ -133,11 +139,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_SEND_TXT) {
-            return new SendTextHolder(parent.getContext(), parent, conversation);
+            return new SendTextHolder(parent.getContext(), parent, conversation, onRecyclerViewListener);
         } else if (viewType == TYPE_RECEIVER_TXT) {
-            return new ReceiveTextHolder(parent.getContext(), parent);
+            return new ReceiveTextHolder(parent.getContext(), parent, onRecyclerViewListener);
+        } else if (viewType == TYPE_RECEIVER_IMAGE) {
+            return new ReceiveImageHolder(parent.getContext(), parent, onRecyclerViewListener);
+        } else if (viewType == TYPE_SEND_IMAGE) {
+            return new SendImageHolder(parent.getContext(), parent, onRecyclerViewListener);
         } else {//开发者自定义的其他类型，可自行处理
-            return new SendTextHolder(parent.getContext(), parent, conversation);
+            return new SendTextHolder(parent.getContext(), parent, conversation, onRecyclerViewListener);
         }
     }
 
@@ -148,6 +158,10 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((SendTextHolder) holder).showTime(shouldShowTime(position));
         } else if (holder instanceof ReceiveTextHolder) {
             ((ReceiveTextHolder) holder).showTime(shouldShowTime(position));
+        } else if (holder instanceof ReceiveImageHolder) {
+            ((ReceiveImageHolder) holder).showTime(shouldShowTime(position));
+        } else if (holder instanceof SendImageHolder) {
+            ((SendImageHolder) holder).showTime(shouldShowTime(position));
         }
 
     }
@@ -155,19 +169,19 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         BmobIMMessage message = messageList.get(position);
-        if(message.getMsgType().equals(BmobIMMessageType.IMAGE.getType())){
-            return message.getFromId().equals(currentUid) ? TYPE_SEND_IMAGE: TYPE_RECEIVER_IMAGE;
-        }else if(message.getMsgType().equals(BmobIMMessageType.LOCATION.getType())){
-            return message.getFromId().equals(currentUid) ? TYPE_SEND_LOCATION: TYPE_RECEIVER_LOCATION;
-        }else if(message.getMsgType().equals(BmobIMMessageType.VOICE.getType())){
-            return message.getFromId().equals(currentUid) ? TYPE_SEND_VOICE: TYPE_RECEIVER_VOICE;
-        }else if(message.getMsgType().equals(BmobIMMessageType.TEXT.getType())){
-            return message.getFromId().equals(currentUid) ? TYPE_SEND_TXT: TYPE_RECEIVER_TXT;
-        }else if(message.getMsgType().equals(BmobIMMessageType.VIDEO.getType())){
-            return message.getFromId().equals(currentUid) ? TYPE_SEND_VIDEO: TYPE_RECEIVER_VIDEO;
-        }else if(message.getMsgType().equals("agree")) {//显示欢迎
+        if (message.getMsgType().equals(BmobIMMessageType.IMAGE.getType())) {
+            return message.getFromId().equals(currentUid) ? TYPE_SEND_IMAGE : TYPE_RECEIVER_IMAGE;
+        } else if (message.getMsgType().equals(BmobIMMessageType.LOCATION.getType())) {
+            return message.getFromId().equals(currentUid) ? TYPE_SEND_LOCATION : TYPE_RECEIVER_LOCATION;
+        } else if (message.getMsgType().equals(BmobIMMessageType.VOICE.getType())) {
+            return message.getFromId().equals(currentUid) ? TYPE_SEND_VOICE : TYPE_RECEIVER_VOICE;
+        } else if (message.getMsgType().equals(BmobIMMessageType.TEXT.getType())) {
+            return message.getFromId().equals(currentUid) ? TYPE_SEND_TXT : TYPE_RECEIVER_TXT;
+        } else if (message.getMsgType().equals(BmobIMMessageType.VIDEO.getType())) {
+            return message.getFromId().equals(currentUid) ? TYPE_SEND_VIDEO : TYPE_RECEIVER_VIDEO;
+        } else if (message.getMsgType().equals("agree")) {//显示欢迎
             return TYPE_AGREE;
-        }else{
+        } else {
             return -1;
         }
     }

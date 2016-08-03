@@ -1,5 +1,6 @@
 package cn.upfinder.upfinder.Presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.List;
@@ -19,8 +20,10 @@ public class SearchUserPresenter implements SearchUserContract.Presenter {
     private static final String TAG = SearchUserPresenter.class.getSimpleName();
 
     private SearchUserContract.View searchUserView;
+    private Context context;
 
-    public SearchUserPresenter(SearchUserContract.View searchUserView) {
+    public SearchUserPresenter(Context context, SearchUserContract.View searchUserView) {
+        this.context = context;
         this.searchUserView = searchUserView;
         searchUserView.setPresenter(this);
     }
@@ -34,17 +37,20 @@ public class SearchUserPresenter implements SearchUserContract.Presenter {
     public void searchUser(String userName) {
         BmobQuery<User> query = new BmobQuery<User>();
         query.addWhereEqualTo("username", userName);
-        query.findObjects(new FindListener<User>() {
-            @Override
-            public void done(List<User> list, BmobException e) {
 
-                if (e == null) { //成功搜索到用户
-                    Log.d(TAG, "done: 共搜索到" + list.size() + "用户");
-                    searchUserView.showSearchResult(list);
-                } else {
-                    searchUserView.showErrMsg("错误码：" + e.getErrorCode() + "：" + e.getMessage());
-                }
+        query.findObjects(context, new FindListener<User>() {
+            @Override
+            public void onSuccess(List<User> list) { //成功搜索到用户
+                Log.d(TAG, "done: 共搜索到" + list.size() + "用户");
+                searchUserView.showSearchResult(list);
             }
+
+            @Override
+            public void onError(int i, String s) {
+                searchUserView.showErrMsg("错误码：" + i + "：" + s);
+            }
+
+
         });
     }
 }

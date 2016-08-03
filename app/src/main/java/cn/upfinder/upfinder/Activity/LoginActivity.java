@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
             bmobUser.setEmail("upfinder@sina.cn");
             bmobUser.setPassword("123456");
         }
-        loginPresenter = new LoginPresenter(bmobUser, loginFragment);
+        loginPresenter = new LoginPresenter(this,bmobUser, loginFragment);
 
 
     }

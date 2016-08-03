@@ -24,8 +24,8 @@ public class UsersHolder extends BaseViewHolder<User> {
     @BindView(R.id.tvUserSign)
     TextView tvUserSign;
 
-    public UsersHolder(Context context, ViewGroup root) {
-        super(context, root, R.layout.item_user_layout);
+    public UsersHolder(Context context, ViewGroup root, OnRecyclerViewListener onRecyclerViewListener) {
+        super(context, root, R.layout.item_user_layout, onRecyclerViewListener);
     }
 
     @Override
@@ -33,6 +33,7 @@ public class UsersHolder extends BaseViewHolder<User> {
 
         Glide.with(getContext())
                 .load(user.getAvatar())
+                .error(R.drawable.ic_photo_loading)
                 .into(ivUserLogo);
         tvUserName.setText(user.getNick() + "(" + user.getUsername() + ")");
         tvUserSign.setText(user.getSign());

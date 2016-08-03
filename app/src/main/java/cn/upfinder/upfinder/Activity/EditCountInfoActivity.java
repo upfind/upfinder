@@ -23,6 +23,6 @@ public class EditCountInfoActivity extends AppCompatActivity {
         }
 
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.flContent);
-        presenter = new EditCountInfoPresenter(fragment);
+        presenter = new EditCountInfoPresenter(this,fragment);
     }
 }

@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/padding_default"
             android:paddingRight="@dimen/padding_default"
-            android:src="@drawable/btn_back"
+            android:src="@drawable/ic_arrow_back_white_36dp"
             />
 
         <TextView

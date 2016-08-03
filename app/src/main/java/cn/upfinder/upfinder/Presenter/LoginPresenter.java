@@ -1,5 +1,6 @@
 package cn.upfinder.upfinder.Presenter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import cn.bmob.v3.exception.BmobException;
@@ -15,8 +16,10 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private final User user;
     private final LoginContract.View loginView;
+    private Context context;
 
-    public LoginPresenter(@NonNull User user, @NonNull LoginContract.View loginView) {
+    public LoginPresenter(Context context, @NonNull User user, @NonNull LoginContract.View loginView) {
+        this.context = context;
         this.user = user;
         this.loginView = loginView;
         this.loginView.setPresenter(this);
@@ -34,7 +37,9 @@ public class LoginPresenter implements LoginContract.Presenter {
         }
         loginView.changeBtnLoginStatus(true);
         loginView.showLoginProgress();
-        User.loginByAccount(count, pwd, new LogInListener<User>() {
+
+
+        User.loginByAccount(context,count, pwd, new LogInListener<User>() {
             @Override
             public void done(User bmobUser, BmobException e) {
 

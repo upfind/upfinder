@@ -1,11 +1,14 @@
 package cn.upfinder.upfinder.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
 
@@ -21,6 +24,7 @@ import cn.upfinder.upfinder.R;
  * Created by upfinder on 2016/7/28 0028.
  */
 public class SendTextHolder extends BaseViewHolder<BmobIMMessage> {
+    private final String TAG = SendTextHolder.class.getSimpleName();
 
     @BindView(R.id.tvMsgTime)
     TextView tvMsgTime;
@@ -37,8 +41,8 @@ public class SendTextHolder extends BaseViewHolder<BmobIMMessage> {
 
     private BmobIMConversation conversation;
 
-    public SendTextHolder(Context context, ViewGroup root, BmobIMConversation conversation) {
-        super(context, root, R.layout.item_msg_text_send_layout);
+    public SendTextHolder(Context context, ViewGroup root, BmobIMConversation conversation, OnRecyclerViewListener onRecyclerViewListener) {
+        super(context, root, R.layout.item_msg_text_send_layout, onRecyclerViewListener);
         this.conversation = conversation;
     }
 
@@ -49,6 +53,13 @@ public class SendTextHolder extends BaseViewHolder<BmobIMMessage> {
         String content = message.getContent();
         tvMsgContent.setText(content);
         tvMsgTime.setText(time);
+        String avatarUri = userInfo.getAvatar();
+        Log.d(TAG, "bindData: " + avatarUri);
+        Glide.with(getContext())
+                .load(avatarUri)
+                .error(R.drawable.ic_photo_loading)
+                .into(ivAvatar);
+
 
         //根据消息发送的状态显示对应的布局
         int status = message.getSendStatus();

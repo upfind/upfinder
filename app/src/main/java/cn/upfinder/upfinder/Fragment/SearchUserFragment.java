@@ -1,5 +1,6 @@
 package cn.upfinder.upfinder.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -17,6 +18,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.upfinder.upfinder.Activity.UserInfoActivity;
+import cn.upfinder.upfinder.Adapter.OnRecyclerViewListener;
 import cn.upfinder.upfinder.Adapter.UsersAdapter;
 import cn.upfinder.upfinder.Contract.SearchUserContract;
 import cn.upfinder.upfinder.Model.Bean.User;
@@ -97,6 +100,22 @@ public class SearchUserFragment extends Fragment implements SearchUserContract.V
         rvUsers.setLayoutManager(layoutManager);
         adapter = new UsersAdapter();
         rvUsers.setAdapter(adapter);
+        adapter.setOnRecyclerViewListener(new OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position) { //用户列表单击，跳转到用户详情页
+                User user = adapter.getItem(position);
+                Intent intent = new Intent(getActivity(), UserInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(UserInfoActivity.INTENT_KEY_USER, user);
+                intent.putExtra(UserInfoActivity.INTENT_KEY_USER, bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public boolean onItemLongClick(int position) {
+                return false;
+            }
+        });
     }
 
     @Override

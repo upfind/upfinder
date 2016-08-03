@@ -24,6 +24,6 @@ public class SearchUserActivity extends AppCompatActivity {
             fragment = SearchUserFragment.newInstance();
         }
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment, R.id.flContent);
-        presenter = new SearchUserPresenter(fragment);
+        presenter = new SearchUserPresenter(this,fragment);
     }
 }

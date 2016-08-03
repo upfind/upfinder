@@ -1,5 +1,7 @@
 package cn.upfinder.upfinder.Model;
 
+import android.content.Context;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.upfinder.upfinder.Model.Bean.User;
@@ -25,7 +27,7 @@ public class UserModel extends BaseModel {
     public User getLocalUser() {
 
         if (localUser == null) {
-            localUser = BmobUser.getCurrentUser(User.class);
+            localUser = BmobUser.getCurrentUser(getContext(),User.class);
         }
         return localUser;
     }
@@ -35,7 +37,7 @@ public class UserModel extends BaseModel {
     }
 
     //同步本地User数据至服务器
-    public void syncToServer(UpdateListener updateListener) {
-        getLocalUser().update(updateListener);
+    public void syncToServer(Context context, UpdateListener updateListener) {
+        getLocalUser().update(context,updateListener);
     }
 }

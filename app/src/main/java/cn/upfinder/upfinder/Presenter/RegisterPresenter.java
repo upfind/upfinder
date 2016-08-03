@@ -1,5 +1,7 @@
 package cn.upfinder.upfinder.Presenter;
 
+import android.content.Context;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -12,8 +14,10 @@ import cn.upfinder.upfinder.Contract.RegisterContract;
 public class RegisterPresenter implements RegisterContract.Presenter {
 
     private final RegisterContract.View registerView;
+    private Context context;
 
-    public RegisterPresenter(RegisterContract.View registerView) {
+    public RegisterPresenter(Context context, RegisterContract.View registerView) {
+        this.context = context;
         this.registerView = registerView;
 
         this.registerView.setPresenter(this);
@@ -42,20 +46,23 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         user.setUsername(count);
         user.setPassword(pwd);
 
-        user.signUp(new SaveListener<BmobUser>() {
-            @Override
-            public void done(BmobUser bmobUser, BmobException e) {
-                if (e == null) {
-                    registerView.registerSuccess();
-                    registerView.changeRegisterBtnStatus(false);
-                    registerView.hideRegisterProgress();
-                } else {
-                    registerView.registerFailed(e.getMessage());
-                    registerView.changeRegisterBtnStatus(false);
-                    registerView.hideRegisterProgress();
-                }
 
+        user.signUp(context, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                registerView.registerSuccess();
+                registerView.changeRegisterBtnStatus(false);
+                registerView.hideRegisterProgress();
             }
+
+            @Override
+            public void onFailure(int i, String s) {
+                registerView.registerFailed(s);
+                registerView.changeRegisterBtnStatus(false);
+                registerView.hideRegisterProgress();
+            }
+
+
         });
 
     }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="10dp"
+              android:layout_marginTop="10dp"
+              android:orientation="horizontal"
+              android:weightSum="4">
+
+    <TextView
+        android:id="@+id/tvAddPicture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/btn_chat_add_picture_selector"
+        android:gravity="center"
+        android:text="@string/picture"
+        />
+
+    <TextView
+        android:id="@+id/tvAddCamera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/btn_chat_add_camera_selector"
+        android:gravity="center"
+        android:text="@string/camera"
+        />
+
+    <TextView
+        android:id="@+id/tvAddLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/btn_chat_add_location_selector"
+        android:gravity="center"
+        android:text="@string/location"
+        />
+
+</LinearLayout>

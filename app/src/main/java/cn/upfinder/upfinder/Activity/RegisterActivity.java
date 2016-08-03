@@ -25,6 +25,6 @@ public class RegisterActivity extends AppCompatActivity {
             registerFragment = RegisterFragment.newInstance();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), registerFragment, R.id.flRegister);
         }
-        registerPresenter = new RegisterPresenter(registerFragment);
+        registerPresenter = new RegisterPresenter(this, registerFragment);
     }
 }

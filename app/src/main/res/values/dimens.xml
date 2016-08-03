@@ -17,6 +17,7 @@
     <dimen name="widget_big">56dp</dimen>
     <dimen name="widget_large">72dp</dimen>
     <dimen name="widget_xlarge">86dp</dimen>
+    <dimen name="widget_xxlarge">120dp</dimen>
 
 
     <dimen name="height_xlarge">80dp</dimen>

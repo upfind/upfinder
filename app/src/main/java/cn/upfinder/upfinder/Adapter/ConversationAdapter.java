@@ -11,15 +11,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.bmob.newim.bean.BmobIMConversation;
-import cn.bmob.newim.bean.BmobIMMessage;
-import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
 import cn.upfinder.upfinder.Model.Bean.Conversation;
 import cn.upfinder.upfinder.Model.Bean.PrivateConversation;
 import cn.upfinder.upfinder.Model.Bean.User;
@@ -60,23 +57,16 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         final PrivateConversation conversation = (PrivateConversation) conversations.get(position);
 
-        conversation.getFromUser(new QueryListener<User>() {
-            @Override
-            public void done(User user, BmobException e) {
-                if (e == null) {
-                    Glide.with(context)
-                            .load(user.getAvatar())
-                            .error(R.drawable.ic_photo_loading)
-                            .into(holder.ivMsgFromLogo);
-                    holder.tvMsgFrom.setText(user.getUsername());
-                } else {
 
-                }
-            }
-        });
-
+        Glide.with(context)
+                .load(conversation.getAvatar())
+                .error(R.drawable.ic_photo_loading)
+                .into(holder.ivMsgFromLogo);
+        holder.tvMsgFrom.setText(conversation.getcName());
+        Log.d(TAG, "onBindViewHolder: " + conversation.getcName());
         holder.tvMsgAbstract.setText(conversation.getLastMessageContent());
-        holder.tvMsgTime.setText(conversation.getLastMessageTime() + "");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        holder.tvMsgTime.setText(dateFormat.format(conversation.getLastMessageTime()));
         holder.itemView.setTag(conversation);
     }
 

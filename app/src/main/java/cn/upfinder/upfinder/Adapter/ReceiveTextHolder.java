@@ -26,8 +26,8 @@ public class ReceiveTextHolder extends BaseViewHolder<BmobIMMessage> {
     @BindView(R.id.tvMsgContent)
     TextView tvMsgContent;
 
-    public ReceiveTextHolder(Context context, ViewGroup root) {
-        super(context, root, R.layout.item_msg_text_receive_layout);
+    public ReceiveTextHolder(Context context, ViewGroup root, OnRecyclerViewListener onRecyclerViewListener) {
+        super(context, root, R.layout.item_msg_text_receive_layout, onRecyclerViewListener);
     }
 
     public void bindData(BmobIMMessage message) {

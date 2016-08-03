@@ -8,7 +8,9 @@ import java.io.File;
 import java.io.FileReader;
 
 import cn.bmob.newim.BmobIM;
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.bmob.v3.datatype.BmobDate;
 import cn.upfinder.upfinder.Handler.MessageHandler;
 
 /**
@@ -46,6 +48,7 @@ public class MyApplication extends Application {
             //注册消息接收器
             BmobIM.registerDefaultMessageHandler(new MessageHandler(this));
         }
+        initBmomConfig();
 
     }
 
@@ -77,8 +80,9 @@ public class MyApplication extends Application {
     private void initBmomConfig() {
         BmobConfig bmobConfig = new BmobConfig.Builder(getContext())
                 .setConnectTimeout(30)
-                .setUploadBlockSize(500*1024)
+                .setUploadBlockSize(500 * 1024)
+                .setApplicationId("1c423bf9e2f10e66afbf40fb98f077f3")
                 .build();
-//        Bmob.getInstance().initConfig(bmobConfig);
+        Bmob.initialize(bmobConfig);
     }
 }

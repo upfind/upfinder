@@ -1,8 +1,5 @@
 package cn.upfinder.upfinder.Model.Bean;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 
 import java.util.List;
@@ -12,8 +9,6 @@ import cn.bmob.newim.bean.BmobIMConversation;
 import cn.bmob.newim.bean.BmobIMConversationType;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMMessageType;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.listener.QueryListener;
 import cn.upfinder.upfinder.R;
 
 /**
@@ -50,16 +45,16 @@ public class PrivateConversation extends Conversation {
         conversation.updateLocalCache();
     }
 
-    @Override
-    public void getFromUser(QueryListener<User> queryListener) {
-        List<BmobIMMessage> msgs = conversation.getMessages();
-        if (msgs.size() > 0) {
-            BmobIMMessage msg = msgs.get(msgs.size() - 1);
-            BmobQuery<User> query = new BmobQuery<>();
-            query.getObject(msg.getFromId(), queryListener);
-        }
-
-    }
+//    @Override
+//    public void getFromUser(QueryListener<User> queryListener) {
+//        List<BmobIMMessage> msgs = conversation.getMessages();
+//        if (msgs.size() > 0) {
+//            BmobIMMessage msg = msgs.get(msgs.size() - 1);
+//            BmobQuery<User> query = new BmobQuery<>();
+//            query.getObject(msg.getFromId(), queryListener);
+//        }
+//
+//    }
 
     @Override
     public String getLastMessageContent() {
@@ -80,6 +75,20 @@ public class PrivateConversation extends Conversation {
             }
         } else {//防止消息错乱
             return "";
+        }
+    }
+
+    @Override
+    public Object getAvatar() {
+        if (cType == BmobIMConversationType.PRIVATE) {
+            String avatar = conversation.getConversationIcon();
+            if (TextUtils.isEmpty(avatar)) {//头像为空，使用默认头像
+                return R.drawable.ic_photo_loading;
+            } else {
+                return avatar;
+            }
+        } else {
+            return R.drawable.ic_photo_loading;
         }
     }
 

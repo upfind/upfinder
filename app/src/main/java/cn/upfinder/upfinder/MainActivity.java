@@ -14,7 +14,6 @@ import butterknife.OnClick;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.upfinder.upfinder.Activity.LoginActivity;
@@ -40,77 +39,77 @@ public class MainActivity extends AppCompatActivity {
         initBmobSdk();
     }
 
-    @OnClick({R.id.btnDelPerson, R.id.btnAddPerson})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnDelPerson:
-                Person person = new Person();
-                person.setObjectId("f14b986505");
-                person.delete(new UpdateListener() {
-                    @Override
-                    public void done(BmobException e) {
-                        if (e == null) {
-                            Log.d(TAG, "done: 删除成功");
-                        } else {
-                            Log.e(TAG, "done: 删除失败");
-                        }
-                    }
-                });
+//    @OnClick({R.id.btnDelPerson, R.id.btnAddPerson})
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.btnDelPerson:
+//                Person person = new Person();
+//                person.setObjectId("f14b986505");
+//                person.delete(new UpdateListener() {
+//                    @Override
+//                    public void done(BmobException e) {
+//                        if (e == null) {
+//                            Log.d(TAG, "done: 删除成功");
+//                        } else {
+//                            Log.e(TAG, "done: 删除失败");
+//                        }
+//                    }
+//                });
+//
+//                break;
+//            case R.id.btnAddPerson:
+//                Person person2 = new Person();
+//                person2.setObjectId("f14b986505");
+//                person2.setName("xiaosi");
+//                person2.setAddress("zhengzhou");
+//                person2.save(new SaveListener<String>() {
+//                    @Override
+//                    public void done(String s, BmobException e) {
+//                        if (e == null) {
+//                            Log.d(TAG, "done: " + s);
+//                        } else {
+//                            Log.d(TAG, "done: " + e.getMessage());
+//                        }
+//                    }
+//                });
+//                break;
+//        }
+//    }
 
-                break;
-            case R.id.btnAddPerson:
-                Person person2 = new Person();
-                person2.setObjectId("f14b986505");
-                person2.setName("xiaosi");
-                person2.setAddress("zhengzhou");
-                person2.save(new SaveListener<String>() {
-                    @Override
-                    public void done(String s, BmobException e) {
-                        if (e == null) {
-                            Log.d(TAG, "done: " + s);
-                        } else {
-                            Log.d(TAG, "done: " + e.getMessage());
-                        }
-                    }
-                });
-                break;
-        }
-    }
 
+//    @OnClick(R.id.btnGetPerson)
+//    void getPerson(View view) {
+//        BmobQuery<Person> bmobQuery = new BmobQuery<>();
+//        bmobQuery.getObject("f14b986505", new QueryListener<Person>() {
+//            @Override
+//            public void done(Person person, BmobException e) {
+//
+//                if (e == null) {
+//                    Log.d(TAG, "done: " + person.getName() + "地址：" + person.getAddress());
+//                    tvShowPerson.setText(person.getName() + "地址：" + person.getAddress() + person.getObjectId());
+//                } else {
+//
+//                    Log.e(TAG, "done: 错误码：" + e.getErrorCode() + "错误信息:" + e.getMessage());
+//                }
+//            }
+//        });
+//    }
 
-    @OnClick(R.id.btnGetPerson)
-    void getPerson(View view) {
-        BmobQuery<Person> bmobQuery = new BmobQuery<>();
-        bmobQuery.getObject("f14b986505", new QueryListener<Person>() {
-            @Override
-            public void done(Person person, BmobException e) {
-
-                if (e == null) {
-                    Log.d(TAG, "done: " + person.getName() + "地址：" + person.getAddress());
-                    tvShowPerson.setText(person.getName() + "地址：" + person.getAddress() + person.getObjectId());
-                } else {
-
-                    Log.e(TAG, "done: 错误码：" + e.getErrorCode() + "错误信息:" + e.getMessage());
-                }
-            }
-        });
-    }
-
-    @OnClick(R.id.btnSetPerson)
-    void setPerson(View view) {
-        Person person = new Person();
-        person.setAddress("河南郑州");
-        person.update("f14b986505", new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null) {
-                    Log.d(TAG, "done: 修改成功");
-                } else {
-                    Log.e(TAG, "done: 修改失败");
-                }
-            }
-        });
-    }
+//    @OnClick(R.id.btnSetPerson)
+//    void setPerson(View view) {
+//        Person person = new Person();
+//        person.setAddress("河南郑州");
+//        person.update("f14b986505", new UpdateListener() {
+//            @Override
+//            public void done(BmobException e) {
+//                if (e == null) {
+//                    Log.d(TAG, "done: 修改成功");
+//                } else {
+//                    Log.e(TAG, "done: 修改失败");
+//                }
+//            }
+//        });
+//    }
 
 
     //初始化BmobSdk

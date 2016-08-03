@@ -7,23 +7,31 @@
     android:layout_height="match_parent"
     tools:context="cn.upfinder.upfinder.Activity.HomeActivity">
 
+    <include
+        android:id="@+id/inTop"
+        layout="@layout/layout_home_topbar"
+        />
+
     <cn.upfinder.upfinder.Widget.NoScrollViewPager
         android:id="@+id/vpHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:layout_below="@id/inTop"
+        android:layout_marginBottom="@dimen/height_big"
+        />
     <android.support.design.widget.TabLayout
         android:id="@+id/tlHome"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_big"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_white_1px_gray_border"
+        android:paddingBottom="@dimen/space_small"
+        android:paddingTop="@dimen/space_small"
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextColor="@color/text_gray"
         app:tabTextAppearance="?android:attr/textAppearanceSmall"
-        android:background="@drawable/bg_white_1px_gray_border"
-        android:paddingTop="@dimen/space_small"
-        android:paddingBottom="@dimen/space_small"
+        app:tabTextColor="@color/text_gray"
         />
+
 
 </RelativeLayout>

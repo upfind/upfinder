@@ -36,8 +36,9 @@ public class ChatActivity extends AppCompatActivity {
         chatFragment = (ChatFragment) getSupportFragmentManager().findFragmentById(R.id.flContent);
         if (chatFragment == null) {
             chatFragment = ChatFragment.newInstance();
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), chatFragment, R.id.flContent);
+
         }
-        chatPresenter = new ChatPresenter(chatFragment, bmobIMConversation);
+        ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), chatFragment, R.id.flContent);
+        chatPresenter = new ChatPresenter(this, chatFragment, bmobIMConversation);
     }
 }

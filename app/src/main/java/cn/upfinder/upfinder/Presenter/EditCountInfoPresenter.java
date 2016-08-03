@@ -1,11 +1,13 @@
 package cn.upfinder.upfinder.Presenter;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.io.File;
 
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
@@ -23,8 +25,10 @@ public class EditCountInfoPresenter implements EditCountInfoContract.Presenter {
 
 
     private EditCountInfoContract.View editCountInfoView;
+    private Context context;
 
-    public EditCountInfoPresenter(EditCountInfoContract.View editCountInfoView) {
+    public EditCountInfoPresenter(Context context, EditCountInfoContract.View editCountInfoView) {
+        this.context = context;
         this.editCountInfoView = editCountInfoView;
         editCountInfoView.setPresenter(this);
     }
@@ -41,65 +45,69 @@ public class EditCountInfoPresenter implements EditCountInfoContract.Presenter {
     public void uploadUserLogo(final String filePath) {
 
         final BmobFile bmobFile = new BmobFile(new File(filePath));
-        bmobFile.uploadblock(new UploadFileListener() {
+
+        bmobFile.uploadblock(context, new UploadFileListener() {
             @Override
-            public void done(BmobException e) {
-                if (e == null) { //上传成功 1.删除服务器中老的头像文件 2.更改本地缓存账户头像地址
-                    String userLogoFileUrl = bmobFile.getFileUrl();
-                    BmobFile oldFile = new BmobFile();
-                    oldFile.setUrl(UserModel.getInstance().getLocalUser().getAvatar());
-                    oldFile.delete(new UpdateListener() {
-                        @Override
-                        public void done(BmobException e) {
+            public void onSuccess() {
+                String userLogoFileUrl = bmobFile.getFileUrl(context);
+                BmobFile oldFile = new BmobFile();
+                oldFile.setUrl(UserModel.getInstance().getLocalUser().getAvatar());
+                oldFile.delete(context, new DeleteListener() {
+                    @Override
+                    public void onSuccess() {
 
-                            if (e == null) {
-                                Log.d(TAG, "done: 删除老头像成功");
-                            } else {
+                    }
 
-                                Log.e(TAG, "done: 删除老头像失败");
-                            }
-                        }
-                    });
+                    @Override
+                    public void onFailure(int i, String s) {
 
-                    UserModel.getInstance().getLocalUser().setAvatar(userLogoFileUrl);
-                    UserModel.getInstance().syncToServer(new UpdateListener() {
-                        @Override
-                        public void done(BmobException e) {
-                            if (e == null) { //更新账户数据成功
-                                editCountInfoView.showUserLogo("");
-                            } else {
-                                editCountInfoView.showUploadErr("更新头像失败");
-                            }
-                        }
-                    });
+                    }
+                });
 
+                UserModel.getInstance().getLocalUser().setAvatar(userLogoFileUrl);
+                UserModel.getInstance().syncToServer(context, new UpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        editCountInfoView.showUserLogo("");
+                    }
 
-                } else { //上传失败
-                    editCountInfoView.showUploadErr("上传头像失败 错误码：" + e.getErrorCode() + "错误信息：" + e.getMessage());
-                }
+                    @Override
+                    public void onFailure(int i, String s) {
+                        editCountInfoView.showUploadErr("更新头像失败");
+                    }
+
+                });
             }
 
             @Override
-            public void onProgress(Integer value) { //返回上传进度
+            public void onFailure(int i, String s) {
+                editCountInfoView.showUploadErr("上传头像失败 错误码：" + i + "错误信息：" + s);
+            }
+
+            @Override
+            public void onProgress(Integer value) {
                 super.onProgress(value);
                 editCountInfoView.showUploadProgress(value);
             }
-
         });
+
+
     }
 
     @Override
     public void uploadNickName(String nickName) {
         UserModel.getInstance().getLocalUser().setNick(nickName);
-        UserModel.getInstance().syncToServer(new UpdateListener() {
+        UserModel.getInstance().syncToServer(context, new UpdateListener() {
             @Override
-            public void done(BmobException e) {
-                if (e == null) { //上传修改昵称成功
-                    editCountInfoView.showUserNick(UserModel.getInstance().getLocalUser().getNick());
-                } else {
-                    editCountInfoView.showEditErr("昵称修改失败！");
-                }
+            public void onSuccess() {//上传修改昵称成功
+                editCountInfoView.showUserNick(UserModel.getInstance().getLocalUser().getNick());
             }
+
+            @Override
+            public void onFailure(int i, String s) {
+                editCountInfoView.showEditErr("昵称修改失败！");
+            }
+
         });
     }
 
@@ -107,16 +115,17 @@ public class EditCountInfoPresenter implements EditCountInfoContract.Presenter {
     public void uploadUserSign(String userSign) {
 
         UserModel.getInstance().getLocalUser().setSign(userSign);
-        UserModel.getInstance().syncToServer(new UpdateListener() {
+        UserModel.getInstance().syncToServer(context, new UpdateListener() {
             @Override
-            public void done(BmobException e) {
-                if (e == null) { // 修改上传签名成功
-
-                    editCountInfoView.showUserSign(UserModel.getInstance().getLocalUser().getSign());
-                } else {
-                    editCountInfoView.showEditErr("签名修改失败！");
-                }
+            public void onSuccess() {
+                editCountInfoView.showUserSign(UserModel.getInstance().getLocalUser().getSign());
             }
+
+            @Override
+            public void onFailure(int i, String s) {
+                editCountInfoView.showEditErr("签名修改失败！");
+            }
+
         });
     }
 }

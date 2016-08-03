@@ -1,11 +1,8 @@
 package cn.upfinder.upfinder.Model.Bean;
 
-import android.content.Context;
-
 import java.io.Serializable;
 
 import cn.bmob.newim.bean.BmobIMConversationType;
-import cn.bmob.v3.listener.QueryListener;
 
 /**
  * 对BmobIMConveration的抽象封装,方便开发者扩展会话类型
@@ -31,7 +28,8 @@ public abstract class Conversation implements Serializable, Comparable {
     /**
      * 获取头像-用于会话界面显示
      */
-    abstract public void getFromUser(QueryListener<User> queryListener);
+//    abstract public void getFromUser(QueryListener<User> queryListener);
+    abstract public Object getAvatar();
 
     /**
      * 获取最后一条消息的时间

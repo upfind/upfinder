@@ -44,8 +44,11 @@ public interface ChatContract {
 
     interface Presenter extends BasePresenter {
 
-        //发送消息
+        //发送文本消息
         void sendTextMsg(String msgContent);
+
+        //发送图片消息
+        void sendLocalImgMsg(String imgPath);
 
         /*查询消息方法
         * 首次加载时可以设置@message为null
@@ -56,5 +59,10 @@ public interface ChatContract {
         //添加页面消息监听器
         void addMsgListener();
 
+        //移除页面消息监听器
+        void removeMsgListener();
+
+        //更新所有消息为已读状态
+        void readAllMsg();
     }
 }

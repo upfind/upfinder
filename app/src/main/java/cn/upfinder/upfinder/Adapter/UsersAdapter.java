@@ -17,6 +17,9 @@ public class UsersAdapter extends RecyclerView.Adapter {
 
     private List<User> userList = new ArrayList<>();
 
+    //点击接口
+    private OnRecyclerViewListener onRecyclerViewListener;
+
     public UsersAdapter() {
     }
 
@@ -38,9 +41,14 @@ public class UsersAdapter extends RecyclerView.Adapter {
         return userList.get(position);
     }
 
+    //添加点击监听
+    public void setOnRecyclerViewListener(OnRecyclerViewListener onRecyclerViewListener) {
+        this.onRecyclerViewListener = onRecyclerViewListener;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new UsersHolder(parent.getContext(), parent);
+        return new UsersHolder(parent.getContext(), parent, onRecyclerViewListener);
     }
 
     @Override

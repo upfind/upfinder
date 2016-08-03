@@ -1,0 +1,113 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    tools:context="cn.upfinder.upfinder.Fragment.UserInfoFragment"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/llCountInfo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_xlarge"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/white_default"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_default"
+        >
+
+        <ImageView
+            android:id="@+id/ivCountUserLogo"
+            android:layout_width="@dimen/widget_large"
+            android:layout_height="@dimen/widget_large"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_account_box_grey_600_48dp"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingTop="@dimen/padding_default"
+            >
+
+            <TextView
+                android:id="@+id/tvCountUserNick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upfinder"
+                android:textColor="@color/text_default"
+                />
+
+            <TextView
+                android:id="@+id/tvCountUserNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:text="账号;upfinder"
+                android:textColor="@color/text_gray"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSign"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_default"
+        android:layout_below="@+id/llCountInfo"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/white_default"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_small"
+        android:paddingLeft="@dimen/padding_default"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_mini"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_sign"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_default"
+            />
+
+        <TextView
+            android:id="@+id/tvCountUserSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:maxLines="2"
+            android:text="@string/setting"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/light_gray"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSendMsg"
+        style="@style/ButtonSingle"
+        android:layout_below="@+id/llSign"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@color/text_gray"
+        android:text="@string/send_msg"
+        android:textColor="@color/white_default"
+        />
+
+    <Button
+        android:id="@+id/btnAddFriends"
+        style="@style/ButtonSingle"
+        android:layout_below="@+id/btnSendMsg"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@color/colorPrimary"
+        android:text="@string/add_friends"
+        android:textColor="@color/white_default"/>
+
+
+</RelativeLayout>

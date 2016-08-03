@@ -16,7 +16,8 @@
         android:layout_gravity="center"
         android:background="@color/text_gray"
         android:padding="@dimen/space_small"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,28 +31,34 @@
             android:layout_height="@dimen/widget_default"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_photo_loading"/>
+            android:background="@drawable/ic_photo_loading"
+            android:scaleType="fitXY"/>
 
-        <TextView
-            android:id="@+id/tvMsgContent"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/ivMsgContent"
+            android:layout_width="@dimen/widget_xxlarge"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_small"
             android:layout_toRightOf="@id/ivAvatar"
+            android:adjustViewBounds="true"
             android:background="@drawable/img_msg_pop_left"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="left|center"
-            android:lineSpacingExtra="@dimen/space_small"
-            android:maxWidth="225.0dip"
-            android:minHeight="@dimen/height_small"
-            android:minWidth="80dp"
-            android:paddingBottom="@dimen/padding_default"
-            android:paddingLeft="@dimen/space_large"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/padding_default"
-            />
+            android:maxHeight="150dp"
+            android:maxWidth="150dip"
+            android:minHeight="120dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:scaleType="fitCenter"/>
+
+        <ProgressBar
+            android:id="@+id/pbMsgLoad"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/ivMsgContent"
+            android:visibility="visible"/>
 
     </RelativeLayout>
 
