@@ -29,4 +29,10 @@ public class CountPresenter implements CountContract.Precenter {
     public void refreshCountInfo() {
 
     }
+
+    @Override
+    public void logOut() {
+        UserModel.getInstance().logOut();
+        countView.jumpToLoginActivity();
+    }
 }

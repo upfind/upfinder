@@ -20,11 +20,17 @@ public interface CountContract {
 
         //展示用户头像大图
         void showCountUserLogo();
+
+        //退出登陆后跳转至登录界面
+        void jumpToLoginActivity();
     }
 
     interface Precenter extends BasePresenter {
 
         //刷新账户信息数据
         void refreshCountInfo();
+
+        //退出登录
+        void logOut();
     }
 }

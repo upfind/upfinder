@@ -2,9 +2,12 @@ package cn.upfinder.upfinder.Presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMConversation;
@@ -44,19 +47,7 @@ public class ChatPresenter implements ChatContract.Presenter {
     @Override
     public void start() {
         chatView.initView(conversation);
-        //连接服务器
-        User user = BmobUser.getCurrentUser(context, User.class);
-        BmobIM.connect(user.getObjectId(), new ConnectListener() {
-            @Override
-            public void done(String s, BmobException e) {
-                if (e == null) {
-                    Log.d(TAG, "done: 连接服务器成功");
-                } else {
-                    Log.e(TAG, "done: 连接服务器失败");
-                    chatView.showToast(e.getMessage());
-                }
-            }
-        });
+
     }
 
     @Override
@@ -69,12 +60,12 @@ public class ChatPresenter implements ChatContract.Presenter {
 
         BmobIMTextMessage msg = new BmobIMTextMessage();
         msg.setContent(msgContent);
-        BmobIMUserInfo userInfo = new BmobIMUserInfo();
-        userInfo.setAvatar(UserModel.getInstance().getLocalUser().getAvatar());
-        userInfo.setName(UserModel.getInstance().getLocalUser().getNick());
-        msg.setBmobIMUserInfo(userInfo);
+        //可设置额外信息
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("avatar", UserModel.getInstance().getLocalUser().getAvatar());//随意增加信息
+//        msg.setExtraMap(map);
+        msg.setExtra(UserModel.getInstance().getLocalUser().getAvatar());
         conversation.sendMessage(msg, new MessageSendListener() {
-
             @Override
             public void onProgress(int i) {
                 super.onProgress(i);

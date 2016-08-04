@@ -1,7 +1,10 @@
 package cn.upfinder.upfinder.Fragment;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.v3.BmobUser;
+import cn.upfinder.upfinder.Activity.ChatActivity;
 import cn.upfinder.upfinder.Contract.UserInfoContract;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.Presenter.UserInfoPresenter;
@@ -65,6 +70,12 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.start();
+    }
+
+    @Override
     public void setPresenter(UserInfoContract.Presenter presenter) {
         this.presenter = presenter;
     }
@@ -75,6 +86,7 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
             case R.id.ivCountUserLogo:
                 break;
             case R.id.btnSendMsg:
+                presenter.sendMsg();
                 break;
             case R.id.btnAddFriends:
                 break;
@@ -83,6 +95,13 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
 
     @Override
     public void initViewShow(User user) {
+        if (user.getObjectId().equals(BmobUser.getCurrentUser(getContext(), User.class).getObjectId())) { //搜索出自己时
+            btnAddFriends.setVisibility(View.GONE);
+            btnSendMsg.setVisibility(View.GONE);
+        } else {
+            btnSendMsg.setVisibility(View.VISIBLE);
+            btnAddFriends.setVisibility(View.VISIBLE);
+        }
         tvCountUserNick.setText(user.getNick());
         tvCountUserNum.setText("账号：" + user.getUsername());
         tvCountUserSign.setText(user.getSign());
@@ -91,4 +110,15 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
                 .error(R.drawable.ic_photo_loading)
                 .into(ivCountUserLogo);
     }
+
+    @Override
+    public void jumpToChatActivity(Bundle bundle) {
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
+        if (bundle != null) {
+            intent.putExtra(ChatActivity.INTENT_KEY_CONVERSATION, bundle);
+        }
+        startActivity(intent);
+    }
+
+
 }

@@ -11,14 +11,22 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import cn.bmob.newim.bean.BmobIMConversation;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMSendStatus;
 import cn.bmob.newim.bean.BmobIMUserInfo;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.listener.FindListener;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
+import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Utils.StringUtil;
 
 /**
  * Created by upfinder on 2016/7/28 0028.
@@ -53,13 +61,34 @@ public class SendTextHolder extends BaseViewHolder<BmobIMMessage> {
         String content = message.getContent();
         tvMsgContent.setText(content);
         tvMsgTime.setText(time);
-        String avatarUri = userInfo.getAvatar();
+
+        String avatarUri = message.getExtra();
         Log.d(TAG, "bindData: " + avatarUri);
         Glide.with(getContext())
                 .load(avatarUri)
                 .error(R.drawable.ic_photo_loading)
                 .into(ivAvatar);
 
+
+//        BmobQuery<User> query = new BmobQuery<>();
+//        query.addWhereEqualTo("objectId", message.getFromId());
+//        query.findObjects(context, new FindListener<User>() {
+//            @Override
+//            public void onSuccess(List<User> list) {
+//
+//                String avatarUri = list.get(0).getAvatar();
+//                Log.d(TAG, "bindData: " + avatarUri);
+//                Glide.with(getContext())
+//                        .load(avatarUri)
+//                        .error(R.drawable.ic_photo_loading)
+//                        .into(ivAvatar);
+//            }
+//
+//            @Override
+//            public void onError(int i, String s) {
+//
+//            }
+//        });
 
         //根据消息发送的状态显示对应的布局
         int status = message.getSendStatus();

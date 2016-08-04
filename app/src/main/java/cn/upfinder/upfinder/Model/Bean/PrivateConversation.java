@@ -13,7 +13,7 @@ import cn.upfinder.upfinder.R;
 
 /**
  * 私聊会话
- * Created by Administrator on 2016/5/25.
+ * Created by upfinder on 2016/5/25.
  */
 public class PrivateConversation extends Conversation {
 

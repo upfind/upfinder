@@ -17,6 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.bmob.v3.exception.BmobException;
+import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
+import cn.upfinder.upfinder.Adapter.Base.ConversationHolder;
 import cn.upfinder.upfinder.Model.Bean.Conversation;
 import cn.upfinder.upfinder.Model.Bean.PrivateConversation;
 import cn.upfinder.upfinder.Model.Bean.User;
@@ -25,18 +27,35 @@ import cn.upfinder.upfinder.R;
 /**
  * Created by upfinder on 2016/7/21 0021.
  */
-public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapter.ViewHolder> implements View.OnClickListener {
+public class ConversationAdapter extends RecyclerView.Adapter {
     private final String TAG = ConversationAdapter.class.getSimpleName();
 
     private Context context;
     private List<Conversation> conversations;
-    private OnItemClickListener onItemClickListener;
+    private OnRecyclerViewListener onRecyclerViewListener;
 
-    public ConversationAdapter(Context context, List<Conversation> conversations, OnItemClickListener onItemClickListener) {
+    public ConversationAdapter(Context context, List<Conversation> conversations) {
         this.conversations = conversations;
         this.context = context;
-        this.onItemClickListener = onItemClickListener;
     }
+
+
+    /*获取用户*/
+    public Conversation getItem(int position) {
+        return conversations.get(position);
+    }
+
+    /*删除数据*/
+    public void removeItem(int position) {
+        int more = getItemCount() - conversations.size();
+        conversations.remove(position - more);
+        notifyDataSetChanged();
+    }
+
+    public void setOnRecyclerViewListener(OnRecyclerViewListener onRecyclerViewListener) {
+        this.onRecyclerViewListener = onRecyclerViewListener;
+    }
+
 
     /*刷新数据*/
     public void refreshData(List<Conversation> conversations) {
@@ -45,60 +64,21 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_msg_layout, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        view.setOnClickListener(this);
-        return viewHolder;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ConversationHolder(parent.getContext(), parent, onRecyclerViewListener);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        final PrivateConversation conversation = (PrivateConversation) conversations.get(position);
-
-
-        Glide.with(context)
-                .load(conversation.getAvatar())
-                .error(R.drawable.ic_photo_loading)
-                .into(holder.ivMsgFromLogo);
-        holder.tvMsgFrom.setText(conversation.getcName());
-        Log.d(TAG, "onBindViewHolder: " + conversation.getcName());
-        holder.tvMsgAbstract.setText(conversation.getLastMessageContent());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
-        holder.tvMsgTime.setText(dateFormat.format(conversation.getLastMessageTime()));
-        holder.itemView.setTag(conversation);
+        ((BaseViewHolder) holder).bindData(conversations.get(position));
     }
+
 
     @Override
     public int getItemCount() {
         return conversations.size();
     }
 
-    @Override
-    public void onClick(View v) {
-        onItemClickListener.onItemClick(v, (Conversation) v.getTag());
-    }
-
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.ivMsgFromLogo)
-        ImageView ivMsgFromLogo;
-        @BindView(R.id.tvMsgFrom)
-        TextView tvMsgFrom;
-        @BindView(R.id.tvMsgAbstract)
-        TextView tvMsgAbstract;
-        @BindView(R.id.tvMsgTime)
-        TextView tvMsgTime;
-
-        ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
-
-    public static interface OnItemClickListener {
-        void onItemClick(View view, Conversation conversation);
-    }
 
 }

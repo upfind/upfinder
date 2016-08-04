@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.upfinder.upfinder.Activity.EditCountInfoActivity;
+import cn.upfinder.upfinder.Activity.LoginActivity;
 import cn.upfinder.upfinder.Contract.CountContract;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
@@ -38,6 +39,8 @@ public class CountFragment extends Fragment implements CountContract.View {
     LinearLayout llCountInfo;
     @BindView(R.id.llSetting)
     LinearLayout llSetting;
+    @BindView(R.id.llExit)
+    LinearLayout llExit;
 
     private CountContract.Precenter presenter;
 
@@ -103,7 +106,14 @@ public class CountFragment extends Fragment implements CountContract.View {
 
     }
 
-    @OnClick({R.id.ivCountUserLogo, R.id.ivCountUserQR, R.id.llCountInfo, R.id.llSetting})
+    @Override
+    public void jumpToLoginActivity() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @OnClick({R.id.ivCountUserLogo, R.id.ivCountUserQR, R.id.llCountInfo, R.id.llSetting, R.id.llExit})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivCountUserLogo:
@@ -115,6 +125,9 @@ public class CountFragment extends Fragment implements CountContract.View {
                 toEditCountInfo();
                 break;
             case R.id.llSetting:
+                break;
+            case R.id.llExit:
+                presenter.logOut();
                 break;
         }
     }

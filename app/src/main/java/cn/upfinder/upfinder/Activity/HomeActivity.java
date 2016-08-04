@@ -75,6 +75,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     //初始化控件

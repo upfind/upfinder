@@ -32,6 +32,9 @@ public class ChatActivity extends AppCompatActivity {
         }
         Bundle bundle = intent.getBundleExtra(INTENT_KEY_CONVERSATION);
         PrivateConversation conversation = (PrivateConversation) bundle.getSerializable(INTENT_KEY_CONVERSATION);
+        if (conversation == null) {
+            return;
+        }
         BmobIMConversation bmobIMConversation = BmobIMConversation.obtain(BmobIMClient.getInstance(), conversation.getConversation());
         chatFragment = (ChatFragment) getSupportFragmentManager().findFragmentById(R.id.flContent);
         if (chatFragment == null) {

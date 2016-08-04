@@ -22,10 +22,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMConversation;
 import cn.upfinder.upfinder.Activity.ChatActivity;
 import cn.upfinder.upfinder.Activity.SearchUserActivity;
 import cn.upfinder.upfinder.Adapter.ConversationAdapter;
+import cn.upfinder.upfinder.Adapter.OnRecyclerViewListener;
 import cn.upfinder.upfinder.Contract.MsgContract;
 import cn.upfinder.upfinder.Model.Bean.Conversation;
 import cn.upfinder.upfinder.Model.Bean.PrivateConversation;
@@ -86,17 +88,30 @@ public class MsgFragment extends Fragment implements MsgContract.View {
     private void initView() {
         Log.d(TAG, "initView: ");
         conversations = new ArrayList<>();
-        conversationAdapter = new ConversationAdapter(getActivity(), conversations, new ConversationAdapter.OnItemClickListener() {
+        conversationAdapter = new ConversationAdapter(getActivity(), conversations);
+        conversationAdapter.setOnRecyclerViewListener(new OnRecyclerViewListener() {
             @Override
-            public void onItemClick(View view, Conversation conversation) {
-                Log.d(TAG, "onItemClick: " + conversation.getLastMessageContent());
+            public void onItemClick(int position) {
+                Log.d(TAG, "onItemClick: " + conversationAdapter.getItem(position));
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(ChatActivity.INTENT_KEY_CONVERSATION, conversation);
+                bundle.putSerializable(ChatActivity.INTENT_KEY_CONVERSATION, conversationAdapter.getItem(position));
                 intent.putExtra(ChatActivity.INTENT_KEY_CONVERSATION, bundle);
                 startActivity(intent);
             }
+
+            @Override
+            public boolean onItemLongClick(int position) {
+                //删除服务器
+                PrivateConversation conversation = (PrivateConversation) conversationAdapter.getItem(position);
+                BmobIMConversation bmobIMConversation = conversation.getConversation();
+                BmobIM.getInstance().deleteConversation(bmobIMConversation);
+                //删除界面
+                conversationAdapter.removeItem(position);
+                return true;
+            }
         });
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvConversation.setLayoutManager(linearLayoutManager);
         //如果可以确定每个Item的高度，这个设置能提高性能

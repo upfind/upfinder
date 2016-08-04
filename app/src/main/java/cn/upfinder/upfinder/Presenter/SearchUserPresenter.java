@@ -35,7 +35,7 @@ public class SearchUserPresenter implements SearchUserContract.Presenter {
 
     @Override
     public void searchUser(String userName) {
-        BmobQuery<User> query = new BmobQuery<User>();
+        BmobQuery<User> query = new BmobQuery<>();
         query.addWhereEqualTo("username", userName);
 
         query.findObjects(context, new FindListener<User>() {
