@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
@@ -37,6 +39,11 @@ public class ReceiveTextHolder extends BaseViewHolder<BmobIMMessage> {
         tvMsgTime.setText(time);
         String content = message.getContent();
         tvMsgContent.setText(content);
+        String avatarUri = message.getBmobIMConversation().getConversationIcon();
+        Glide.with(getContext())
+                .load(avatarUri)
+                .error(R.drawable.ic_photo_loading)
+                .into(ivAvatar);
 
     }
 

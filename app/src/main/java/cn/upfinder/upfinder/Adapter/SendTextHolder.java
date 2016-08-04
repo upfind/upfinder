@@ -25,6 +25,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
 import cn.upfinder.upfinder.Model.Bean.User;
+import cn.upfinder.upfinder.Model.UserModel;
 import cn.upfinder.upfinder.R;
 import cn.upfinder.upfinder.Utils.StringUtil;
 
@@ -56,39 +57,17 @@ public class SendTextHolder extends BaseViewHolder<BmobIMMessage> {
 
     public void bindData(BmobIMMessage message) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        BmobIMUserInfo userInfo = message.getBmobIMUserInfo();
         String time = dateFormat.format(message.getCreateTime());
         String content = message.getContent();
         tvMsgContent.setText(content);
         tvMsgTime.setText(time);
 
-        String avatarUri = message.getExtra();
+        String avatarUri = UserModel.getInstance().getLocalUser().getAvatar();
         Log.d(TAG, "bindData: " + avatarUri);
         Glide.with(getContext())
                 .load(avatarUri)
                 .error(R.drawable.ic_photo_loading)
                 .into(ivAvatar);
-
-
-//        BmobQuery<User> query = new BmobQuery<>();
-//        query.addWhereEqualTo("objectId", message.getFromId());
-//        query.findObjects(context, new FindListener<User>() {
-//            @Override
-//            public void onSuccess(List<User> list) {
-//
-//                String avatarUri = list.get(0).getAvatar();
-//                Log.d(TAG, "bindData: " + avatarUri);
-//                Glide.with(getContext())
-//                        .load(avatarUri)
-//                        .error(R.drawable.ic_photo_loading)
-//                        .into(ivAvatar);
-//            }
-//
-//            @Override
-//            public void onError(int i, String s) {
-//
-//            }
-//        });
 
         //根据消息发送的状态显示对应的布局
         int status = message.getSendStatus();

@@ -2,6 +2,7 @@ package cn.upfinder.upfinder.Adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,13 +18,14 @@ import cn.bmob.newim.bean.BmobIMImageMessage;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMSendStatus;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
+import cn.upfinder.upfinder.Model.UserModel;
 import cn.upfinder.upfinder.R;
 
 /**
  * Created by Administrator on 2016/8/2 0002.
  */
 public class SendImageHolder extends BaseViewHolder<BmobIMMessage> {
-
+    private final String TAG = SendImageHolder.class.getSimpleName();
 
     @BindView(R.id.tvMsgTime)
     TextView tvMsgTime;
@@ -76,11 +78,12 @@ public class SendImageHolder extends BaseViewHolder<BmobIMMessage> {
 //                    .into(ivMsgContent);
 //        }
 
-        String loadUrl = TextUtils.isEmpty(imageMessage.getRemoteUrl()) ? imageMessage.getLocalPath() : imageMessage.getRemoteUrl();
-        Glide.with(context)
-                .load(loadUrl)
+        String avatarUri = UserModel.getInstance().getLocalUser().getAvatar();
+        Log.d(TAG, "bindData: " + avatarUri);
+        Glide.with(getContext())
+                .load(avatarUri)
                 .error(R.drawable.ic_photo_loading)
-                .into(ivMsgContent);
+                .into(ivAvatar);
     }
 
     public void showTime(boolean isShow) {
