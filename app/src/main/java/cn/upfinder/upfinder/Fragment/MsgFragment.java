@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,6 +48,9 @@ public class MsgFragment extends Fragment implements MsgContract.View {
     RelativeLayout rlAlert;
     @BindView(R.id.pbProgress)
     ContentLoadingProgressBar pbProgress;
+    @BindView(R.id.swRefresh)
+    SwipeRefreshLayout swRefresh;
+
     private MsgContract.Precenter precenter;
 
     private ConversationAdapter conversationAdapter;
@@ -117,6 +121,14 @@ public class MsgFragment extends Fragment implements MsgContract.View {
         //如果可以确定每个Item的高度，这个设置能提高性能
 //        rvConversation.setHasFixedSize(true);
         rvConversation.setAdapter(conversationAdapter);
+
+        //初始化下拉刷新
+        swRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "onRefresh: 正在刷新");
+            }
+        });
     }
 
     @Override

@@ -4,12 +4,18 @@
              android:layout_height="match_parent"
              tools:context="cn.upfinder.upfinder.Fragment.MsgFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvConversation"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvConversation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
         android:id="@+id/rlAlert"
@@ -38,10 +44,10 @@
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/pbProgress"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleLarge"
-        android:visibility="invisible"
         android:layout_gravity="center"
+        android:visibility="invisible"
         />
 </FrameLayout>
