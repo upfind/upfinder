@@ -28,10 +28,12 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.upfinder.upfinder.Adapter.HomeVPAdapter;
 import cn.upfinder.upfinder.Fragment.CountFragment;
+import cn.upfinder.upfinder.Fragment.FindFragment;
 import cn.upfinder.upfinder.Fragment.MsgFragment;
 import cn.upfinder.upfinder.Fragment.NearbyFragment;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.Presenter.CountPresenter;
+import cn.upfinder.upfinder.Presenter.FindPresenter;
 import cn.upfinder.upfinder.Presenter.MsgPresenter;
 import cn.upfinder.upfinder.Presenter.NearbyPresenter;
 import cn.upfinder.upfinder.R;
@@ -102,17 +104,17 @@ public class HomeActivity extends AppCompatActivity {
         tlHome.addTab(tlHome.newTab().setIcon(R.drawable.bg_tabitem_count).setText("我"));
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
         NearbyFragment nearbyFragment = NearbyFragment.newInstance("附近", "人");
-        NearbyFragment nearbyFragment1 = NearbyFragment.newInstance("附近", "人");
+        FindFragment findFragment = FindFragment.newInstance("搜索", "人");
         MsgFragment msgFragment = MsgFragment.newInstance();
         CountFragment countFragment = CountFragment.newInstance();
 
         NearbyPresenter nearbyPresenter = new NearbyPresenter(nearbyFragment);
-        NearbyPresenter nearbyPresenter1 = new NearbyPresenter(nearbyFragment1);
+        FindPresenter findPresenter = new FindPresenter(this, findFragment);
         MsgPresenter msgPresenter = new MsgPresenter(msgFragment);
         CountPresenter countPresenter = new CountPresenter(countFragment);
 
         fragmentArrayList.add(nearbyFragment);
-        fragmentArrayList.add(nearbyFragment1);
+        fragmentArrayList.add(findFragment);
         fragmentArrayList.add(msgFragment);
         fragmentArrayList.add(countFragment);
         adapter = new HomeVPAdapter(getSupportFragmentManager(), fragmentArrayList);

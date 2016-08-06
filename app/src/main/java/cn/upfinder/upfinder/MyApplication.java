@@ -3,6 +3,8 @@ package cn.upfinder.upfinder;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.mapapi.SDKInitializer;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -50,6 +52,13 @@ public class MyApplication extends Application {
         }
         initBmomConfig();
 
+        //初始化百度地图 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
+        initBaiduMap();
+
+    }
+
+    private void initBaiduMap() {
+//        SDKInitializer.initialize(getContext());
     }
 
     public static Context getContext() {

@@ -89,6 +89,12 @@
             android:value="1c423bf9e2f10e66afbf40fb98f077f3"/>
         <!-- bmobim end -->
 
+        <!--设置百度地图 APP KEY-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="n98gsoGVBCpEGl3EInSARXluqfAUbBch"/>
+        <!--百度地图结束-->
+
         <activity android:name=".Activity.ChatActivity">
         </activity>
         <activity android:name=".Activity.UserInfoActivity">

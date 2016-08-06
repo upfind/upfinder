@@ -1,12 +1,17 @@
 package cn.upfinder.upfinder;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.baidu.mapapi.SDKInitializer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -135,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         //.build();
         //Bmob.initialize(config);
     }
+
+
 
 
 }
