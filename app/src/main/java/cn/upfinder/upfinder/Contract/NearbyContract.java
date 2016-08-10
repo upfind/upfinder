@@ -9,11 +9,11 @@ import cn.upfinder.upfinder.Presenter.BasePresenter;
  */
 public interface NearbyContract {
 
-    interface View extends BaseView<NearbyContract.Precenter> {
+    interface View extends BaseView<NearbyContract.Presenter> {
 
     }
 
-    interface Precenter extends BasePresenter {
+    interface Presenter extends BasePresenter {
 
     }
 }

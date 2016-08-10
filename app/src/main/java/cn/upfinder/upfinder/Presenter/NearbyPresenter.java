@@ -8,7 +8,7 @@ import cn.upfinder.upfinder.Contract.NearbyContract;
  * Created by upfinder on 2016/7/21 0021.
  * 附近的页面的控制类
  */
-public class NearbyPresenter implements NearbyContract.Precenter {
+public class NearbyPresenter implements NearbyContract.Presenter {
 
 
     private final NearbyContract.View nearbyView;

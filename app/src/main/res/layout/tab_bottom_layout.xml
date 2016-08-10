@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_big"
+    android:orientation="vertical">
+
+
+    <View
+        android:id="@+id/radioSplit"
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white_default"/>
+
+    <RadioGroup
+        android:id="@+id/rgTabs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rlTabNearby"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/rbTabNearby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#00000000"
+                android:button="@null"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/bg_tabitem_nearby"
+                android:gravity="center"
+                android:text="@string/tab_nearby"
+                android:textColor="@color/text_default"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tvBadgeCountNearby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabNearby"
+                android:layout_toRightOf="@id/rbTabNearby"
+                android:background="@drawable/badge_count_bg"
+                android:gravity="center"
+                android:text="99+"
+                android:textColor="@color/white_default"
+                android:textSize="10sp"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/ivBadgeDotNearby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabNearby"
+                android:layout_marginLeft="-5dp"
+                android:layout_toRightOf="@id/rbTabNearby"
+                android:src="@drawable/badge_dot"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rlTabFind"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/rbTabFind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#00000000"
+                android:button="@null"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/bg_tabitem_find"
+                android:gravity="center"
+                android:text="@string/tab_find"
+                android:textColor="@color/text_default"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tvBadgeCountFind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabFind"
+                android:layout_toRightOf="@id/rbTabFind"
+                android:background="@drawable/badge_count_bg"
+                android:gravity="center"
+                android:text="99+"
+                android:textColor="@color/white_default"
+                android:textSize="10sp"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/ivBadgeDotFind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabFind"
+                android:layout_marginLeft="-5dp"
+                android:layout_toRightOf="@id/rbTabFind"
+                android:src="@drawable/badge_dot"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTabMsg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/rbTabMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#00000000"
+                android:button="@null"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/bg_tabitem_msg"
+                android:gravity="center"
+                android:text="@string/tab_msg"
+                android:textColor="@color/text_default"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tvBadgeCountMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabMsg"
+                android:layout_toRightOf="@id/rbTabMsg"
+                android:background="@drawable/badge_count_bg"
+                android:gravity="center"
+                android:text="99+"
+                android:textColor="@color/white_default"
+                android:textSize="10sp"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/ivBadgeDotMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabMsg"
+                android:layout_marginLeft="-5dp"
+                android:layout_toRightOf="@id/rbTabMsg"
+                android:src="@drawable/badge_dot"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlTabMy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/rbTabMy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#00000000"
+                android:button="@null"
+                android:drawablePadding="2dip"
+                android:drawableTop="@drawable/bg_tabitem_count"
+                android:gravity="center"
+                android:text="@string/tab_count"
+                android:textColor="@color/text_default"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/tvBadgeCountMy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabMy"
+                android:layout_toRightOf="@id/rbTabMy"
+                android:background="@drawable/badge_count_bg"
+                android:gravity="center"
+                android:text="99+"
+                android:textColor="@color/white_default"
+                android:textSize="10sp"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/ivBadgeDotMy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/rbTabMy"
+                android:layout_marginLeft="-5dp"
+                android:layout_toRightOf="@id/rbTabMy"
+                android:src="@drawable/badge_dot"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+    </RadioGroup>
+</LinearLayout>

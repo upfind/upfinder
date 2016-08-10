@@ -19,19 +19,25 @@
         android:layout_below="@id/inTop"
         android:layout_marginBottom="@dimen/height_big"
         />
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tlHome"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_big"
+    <!--<android.support.design.widget.TabLayout-->
+    <!--android:id="@+id/tlHome"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/height_big"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="@drawable/bg_white_1px_gray_border"-->
+    <!--android:paddingBottom="@dimen/space_small"-->
+    <!--android:paddingTop="@dimen/space_small"-->
+    <!--app:tabIndicatorHeight="0dp"-->
+    <!--app:tabSelectedTextColor="@color/colorPrimary"-->
+    <!--app:tabTextAppearance="?android:attr/textAppearanceSmall"-->
+    <!--app:tabTextColor="@color/text_gray"-->
+    <!--/>-->
+
+    <include
+        layout="@layout/tab_bottom_layout"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_white_1px_gray_border"
-        android:paddingBottom="@dimen/space_small"
-        android:paddingTop="@dimen/space_small"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextAppearance="?android:attr/textAppearanceSmall"
-        app:tabTextColor="@color/text_gray"
-        />
+        android:layout_width="match_parent"/>
 
 
 </RelativeLayout>

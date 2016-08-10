@@ -15,8 +15,11 @@ import cn.bmob.newim.notification.BmobNotificationManager;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.Model.Bean.User;
 
 /**
@@ -128,5 +131,53 @@ public class UserModel extends BaseModel {
         } else {
             listener.internalDone(null);
         }
+    }
+
+    /*
+    * 查询好友
+    * */
+    public void queryFriends(final FindListener<Friend> listener) {
+        BmobQuery<Friend> query = new BmobQuery<>();
+        User user = BmobUser.getCurrentUser(getContext(), User.class);
+        query.addWhereEqualTo("user", user);
+        query.include("friendUser");
+        query.order("_updatedAt");
+        query.findObjects(getContext(), new FindListener<Friend>() {
+            @Override
+            public void onSuccess(List<Friend> list) {
+                if (list != null && list.size() > 0) {
+                    listener.onSuccess(list);
+                } else {
+                    listener.onError(0, "暂无联系人");
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+                listener.onError(i, s);
+            }
+        });
+    }
+
+    /**
+     * 同意添加好友：1、发送同意添加的请求，2、添加对方到自己的好友列表中
+     */
+    public void agreeAddFriend(User friend,SaveListener listener){
+        Friend f = new Friend();
+        User user =BmobUser.getCurrentUser(getContext(), User.class);
+        f.setUser(user);
+        f.setFriendUser(friend);
+        f.save(getContext(),listener);
+    }
+
+    /**
+     * 删除好友
+     * @param f
+     * @param listener
+     */
+    public void deleteFriend(Friend f,DeleteListener listener){
+        Friend friend =new Friend();
+        friend.delete(getContext(),f.getObjectId(),listener);
     }
 }

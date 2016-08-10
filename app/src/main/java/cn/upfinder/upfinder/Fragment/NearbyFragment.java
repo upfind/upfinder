@@ -20,7 +20,7 @@ public class NearbyFragment extends Fragment implements NearbyContract.View {
     private String mParam1;
     private String mParam2;
 
-    private NearbyContract.Precenter precenter;
+    private NearbyContract.Presenter presenter;
 
 
     public NearbyFragment() {
@@ -56,11 +56,11 @@ public class NearbyFragment extends Fragment implements NearbyContract.View {
     @Override
     public void onResume() {
         super.onResume();
-        precenter.start();
+        presenter.start();
     }
 
     @Override
-    public void setPresenter(NearbyContract.Precenter presenter) {
-        this.precenter = presenter;
+    public void setPresenter(NearbyContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 }
