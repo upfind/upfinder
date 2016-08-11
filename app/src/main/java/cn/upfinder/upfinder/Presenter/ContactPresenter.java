@@ -3,11 +3,16 @@ package cn.upfinder.upfinder.Presenter;
 import android.content.Context;
 import android.util.Log;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.listener.FindListener;
 import cn.upfinder.upfinder.Contract.ContactContract;
+import cn.upfinder.upfinder.Model.Bean.Contact;
 import cn.upfinder.upfinder.Model.Bean.Friend;
+import cn.upfinder.upfinder.Model.DB.DBHelper;
+import cn.upfinder.upfinder.Model.DB.Dao.ContactDao;
 import cn.upfinder.upfinder.Model.UserModel;
 
 /**
@@ -30,7 +35,7 @@ public class ContactPresenter implements ContactContract.Presenter {
     }
 
     @Override
-    public void initContactData() {
+    public void obtainContactData() {
         Log.d(TAG, "initContactData: ");
         //查询联系人数据
         UserModel.getInstance().queryFriends(new FindListener<Friend>() {
@@ -53,4 +58,28 @@ public class ContactPresenter implements ContactContract.Presenter {
     public void delContact() {
 
     }
+
+    @Override
+    public void obtainDBContactData() {
+        try {
+            List<Contact> contactList = new ContactDao(context).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Contact> transData(List<Friend> friendList) {
+        List<Contact> contactList = new ArrayList<>();
+        for (Friend friend : friendList) {
+            Contact contact = new Contact();
+            contact.setUserAvatar(friend.getFriendUser().getAvatar());
+            contact.setNickName(friend.getFriendUser().getNick());
+            contact.setUserObjectId(friend.getFriendUser().getObjectId());
+            contactList.add(contact);
+        }
+        return contactList;
+    }
+
+
 }

@@ -36,4 +36,6 @@ public class Friend extends BmobObject {
     public void setFriendUser(User friendUser) {
         this.friendUser = friendUser;
     }
+
+
 }

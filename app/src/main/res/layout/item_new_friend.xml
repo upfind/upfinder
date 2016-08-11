@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/space_small"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/space_small"
+
+    android:orientation="horizontal"
+    >
+
+    <ImageView
+        android:id="@+id/ivNewFriendLogo"
+        android:layout_width="@dimen/widget_big"
+        android:layout_height="@dimen/widget_big"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:id="@+id/tvNewFriendName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:maxEms="10"
+        android:maxLines="1"
+        android:text="Large Texthenchuang henshaunv"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+
+    <TextView
+        android:id="@+id/tvNewFriendSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_default"
+        android:layout_marginTop="@dimen/space_small"
+        android:maxLines="2"
+        android:text="Medium Text很多狠毒扥花llla nbd jjaikaikj kijaisaka anhifja kjaifjiacakjfia kjaijamckajif"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnNewFriendActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="同意"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="@color/colorPrimary"
+        />
+
+</LinearLayout>

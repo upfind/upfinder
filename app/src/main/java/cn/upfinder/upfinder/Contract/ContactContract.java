@@ -3,6 +3,7 @@ package cn.upfinder.upfinder.Contract;
 import java.util.List;
 
 import cn.upfinder.upfinder.Fragment.BaseView;
+import cn.upfinder.upfinder.Model.Bean.Contact;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.Presenter.BasePresenter;
 
@@ -23,10 +24,19 @@ public interface ContactContract {
     interface Presenter extends BasePresenter {
 
         //加载联系人列表数据
-        void initContactData();
+        void obtainContactData();
 
         //删除单个联系人
         void delContact();
+
+        //加载数据库缓存数据
+        void obtainDBContactData();
+
+        //加载数据 1.获取当前数据库缓存数据 2.若数据库中没有缓存则加载服务器并同时缓存到数据库 3.当下拉刷新时拉取服务器
+
+
+        //将加载的网络数据Friend数据，转换成Contact类数据
+        List<Contact> transData(List<Friend> friendList);
 
     }
 }
