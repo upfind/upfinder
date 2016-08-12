@@ -25,6 +25,7 @@ import cn.upfinder.upfinder.Contract.UserInfoContract;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.Presenter.UserInfoPresenter;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Utils.ToastUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,6 +90,7 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
                 presenter.sendMsg();
                 break;
             case R.id.btnAddFriends:
+                presenter.sendAddRequest();
                 break;
         }
     }
@@ -118,6 +120,11 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
             intent.putExtra(ChatActivity.INTENT_KEY_CONVERSATION, bundle);
         }
         startActivity(intent);
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtil.showShort(getContext(), msg);
     }
 
 

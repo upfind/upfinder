@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +25,7 @@ import cn.upfinder.upfinder.Adapter.NewFriendAdapter;
 import cn.upfinder.upfinder.Contract.NewFriendContract;
 import cn.upfinder.upfinder.Model.Bean.NewFriend;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Utils.ToastUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,5 +97,16 @@ public class NewFriendFragment extends Fragment implements NewFriendContract.Vie
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void showAllNewFriend(List<NewFriend> newFriendList) {
+        adapter.setFriendList(newFriendList);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtil.showShort(getContext(), msg);
     }
 }

@@ -11,7 +11,7 @@ import cn.upfinder.upfinder.Model.Bean.Contact;
 import cn.upfinder.upfinder.Model.DB.DBHelper;
 
 /**
- * Created by Administrator on 2016/8/11 0011.
+ * Created by upfinder on 2016/8/11 0011.
  */
 public class ContactDao {
 

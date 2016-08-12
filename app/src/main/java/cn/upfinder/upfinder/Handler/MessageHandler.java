@@ -6,12 +6,14 @@ import android.util.Log;
 
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMMessageType;
+import cn.bmob.newim.bean.BmobIMSendStatus;
 import cn.bmob.newim.event.MessageEvent;
 import cn.bmob.newim.event.OfflineMessageEvent;
 import cn.bmob.newim.listener.BmobIMMessageHandler;
 import cn.bmob.newim.notification.BmobNotificationManager;
 import cn.bmob.v3.exception.BmobException;
 import cn.upfinder.upfinder.Activity.HomeActivity;
+import cn.upfinder.upfinder.Config;
 import cn.upfinder.upfinder.Model.UpdateCacheListener;
 import cn.upfinder.upfinder.Model.UserModel;
 
@@ -46,6 +48,7 @@ public class MessageHandler extends BmobIMMessageHandler {
         Log.d(TAG, "onOfflineReceive: " + offlineMessageEvent.getTotalNumber());
     }
 
+
     /*
     * 当接收到消息时处理消息
     * */
@@ -55,8 +58,15 @@ public class MessageHandler extends BmobIMMessageHandler {
             @Override
             public void done(BmobException e) {
                 BmobIMMessage msg = messageEvent.getMessage();
+                int type = BmobIMMessageType.getMessageTypeValue(msg.getMsgType());
+                Log.d(TAG, "done: " + type);
                 if (BmobIMMessageType.getMessageTypeValue(msg.getMsgType()) == 0) {//用户自定义的消息类型，其类型值均为0
                     Log.d(TAG, "done: 处理自定义类型消息");
+                    if (msg.getMsgType().equals(Config.MSG_TYPE_ADD_NEW_FRIEND)) { //收到添加好友请求
+
+                    } else if (msg.getMsgType().equals(Config.MSG_TYPE_AGREE_ADD_FRIEND)) { //收到同意添加回复
+
+                    }
                 } else { // SDK内部支持的消息类型
                     if (BmobNotificationManager.getInstance(context).isShowNotification()) {//如果需要显示通知栏，SDK提供以下两种显示方式：
                         Intent pendingIntent = new Intent(context, HomeActivity.class);

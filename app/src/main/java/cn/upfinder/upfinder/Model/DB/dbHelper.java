@@ -20,9 +20,7 @@ import cn.upfinder.upfinder.Model.Bean.Contact;
  */
 public class DBHelper extends OrmLiteSqliteOpenHelper {
     private final String TAG = DBHelper.class.getSimpleName();
-
     private static final String TABLE_NAME = "sl_upfinder.db";
-
     private Map<String,Dao> daos = new HashMap<>();
 
 
@@ -62,7 +60,6 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         Log.d(TAG, "onCreate: 创建SQLLite数据库");
-
         try {
             TableUtils.createTable(connectionSource, Contact.class);
         } catch (SQLException e) {

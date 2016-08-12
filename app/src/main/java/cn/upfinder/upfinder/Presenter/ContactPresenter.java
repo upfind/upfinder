@@ -13,6 +13,7 @@ import cn.upfinder.upfinder.Model.Bean.Contact;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.Model.DB.DBHelper;
 import cn.upfinder.upfinder.Model.DB.Dao.ContactDao;
+import cn.upfinder.upfinder.Model.DB.Dao.FriendDao;
 import cn.upfinder.upfinder.Model.UserModel;
 
 /**

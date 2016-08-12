@@ -134,7 +134,7 @@ public class UserModel extends BaseModel {
     }
 
     /*
-    * 查询好友
+    * 查询好友 从服务器
     * */
     public void queryFriends(final FindListener<Friend> listener) {
         BmobQuery<Friend> query = new BmobQuery<>();

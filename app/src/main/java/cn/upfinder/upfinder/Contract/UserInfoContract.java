@@ -2,6 +2,7 @@ package cn.upfinder.upfinder.Contract;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 
 import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.upfinder.upfinder.Fragment.BaseView;
@@ -21,6 +22,9 @@ public interface UserInfoContract {
 
         //跳转到聊天页面
         void jumpToChatActivity(Bundle bundle);
+
+        //现实提示Toast
+        void showToast(String msg);
     }
 
     interface Presenter extends BasePresenter {
