@@ -34,7 +34,7 @@
     <!--/>-->
 
     <include
-        layout="@layout/tab_bottom_layout"
+        layout="@layout/layout_tab_bottom"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"/>

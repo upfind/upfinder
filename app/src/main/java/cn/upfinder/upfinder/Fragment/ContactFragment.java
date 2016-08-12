@@ -72,9 +72,7 @@ public class ContactFragment extends Fragment implements ContactContract.View {
     }
 
     private void initView() {
-        Log.d(TAG, "initView: 初始化界面");
-
-        adapter = new ContactAdapter();
+        adapter = new ContactAdapter(getContext());
         adapter.setOnRecyclerViewListener(new OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position) {
@@ -92,6 +90,7 @@ public class ContactFragment extends Fragment implements ContactContract.View {
 
         adapter.setFriendList(new ArrayList<Friend>());
         rcContact.setAdapter(adapter);
+        Log.d(TAG, "initView:初始化界面 " + adapter.getItemCount());
     }
 
     @Override

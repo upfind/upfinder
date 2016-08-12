@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="cn.upfinder.upfinder.Fragment.ChatFragment">
 
-    <include layout="@layout/top_nav_layout"/>
+    <include layout="@layout/layout_top_nav"/>
 
     <FrameLayout
         android:layout_width="match_parent"

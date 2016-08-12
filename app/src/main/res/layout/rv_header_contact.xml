@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llContactNewFriend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_horizontal_margin"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/widget_small"
+            android:layout_height="@dimen/widget_small"
+            android:background="@drawable/ic_person_add_yellow_900_36dp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/padding_default"
+            android:layout_weight="1"
+            android:text="新的朋友"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+        <ImageView
+            android:id="@+id/ivContactNewFriendDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/badge_dot"
+            />
+    </LinearLayout>
+
+</LinearLayout>

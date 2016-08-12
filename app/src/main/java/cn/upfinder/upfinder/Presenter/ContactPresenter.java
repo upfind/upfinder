@@ -32,6 +32,7 @@ public class ContactPresenter implements ContactContract.Presenter {
 
     @Override
     public void start() {
+        obtainContactData();
     }
 
     @Override
