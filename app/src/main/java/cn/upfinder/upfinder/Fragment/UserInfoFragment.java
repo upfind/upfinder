@@ -1,7 +1,6 @@
 package cn.upfinder.upfinder.Fragment;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +22,6 @@ import cn.bmob.v3.BmobUser;
 import cn.upfinder.upfinder.Activity.ChatActivity;
 import cn.upfinder.upfinder.Contract.UserInfoContract;
 import cn.upfinder.upfinder.Model.Bean.User;
-import cn.upfinder.upfinder.Presenter.UserInfoPresenter;
 import cn.upfinder.upfinder.R;
 import cn.upfinder.upfinder.Utils.ToastUtil;
 
@@ -49,6 +47,10 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
     Button btnSendMsg;
     @BindView(R.id.btnAddFriends)
     Button btnAddFriends;
+    @BindView(R.id.btn_back)
+    ImageView btnBack;
+    @BindView(R.id.tvPagerName)
+    TextView tvPagerName;
 
     private UserInfoContract.Presenter presenter;
 
@@ -73,7 +75,12 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView();
         presenter.start();
+    }
+
+    private void initView() {
+        tvPagerName.setText("用户信息");
     }
 
     @Override
@@ -81,7 +88,7 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
         this.presenter = presenter;
     }
 
-    @OnClick({R.id.ivCountUserLogo, R.id.btnSendMsg, R.id.btnAddFriends})
+    @OnClick({R.id.ivCountUserLogo, R.id.btnSendMsg, R.id.btnAddFriends, R.id.btn_back, R.id.tvPagerName})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivCountUserLogo:
@@ -92,6 +99,11 @@ public class UserInfoFragment extends Fragment implements UserInfoContract.View 
             case R.id.btnAddFriends:
                 presenter.sendAddRequest();
                 break;
+            case R.id.btn_back:
+            case R.id.tvPagerName: //后退
+                getActivity().finish();
+                break;
+
         }
     }
 

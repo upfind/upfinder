@@ -1,16 +1,22 @@
 package cn.upfinder.upfinder.Presenter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.bean.BmobIMConversation;
+import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.v3.listener.FindListener;
+import cn.upfinder.upfinder.Activity.ChatActivity;
 import cn.upfinder.upfinder.Contract.ContactContract;
 import cn.upfinder.upfinder.Model.Bean.Contact;
 import cn.upfinder.upfinder.Model.Bean.Friend;
+import cn.upfinder.upfinder.Model.Bean.PrivateConversation;
 import cn.upfinder.upfinder.Model.DB.DBHelper;
 import cn.upfinder.upfinder.Model.DB.Dao.ContactDao;
 import cn.upfinder.upfinder.Model.DB.Dao.FriendDao;
@@ -68,6 +74,20 @@ public class ContactPresenter implements ContactContract.Presenter {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void toChatWithFriend(Friend friend) {
+
+        //构造对方的
+        BmobIMUserInfo userInfo = new BmobIMUserInfo(friend.getFriendUser().getObjectId(), friend.getFriendUser().getUsername(), friend.getFriendUser().getAvatar());
+        //启动一个会话
+        BmobIMConversation c = BmobIM.getInstance().startPrivateConversation(userInfo, false, null);
+        PrivateConversation conversation = new PrivateConversation(c);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(ChatActivity.INTENT_KEY_CONVERSATION, conversation);
+        contactView.jumpToChatActivity(bundle);
+
     }
 
     @Override

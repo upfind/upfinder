@@ -8,7 +8,7 @@ import cn.upfinder.upfinder.Model.UserModel;
  * Created by upfinder on 2016/7/22 0022.
  * 账户相关页面管理类
  */
-public class CountPresenter implements CountContract.Precenter {
+public class CountPresenter implements CountContract.Presenter {
 
 
     private CountContract.View countView;

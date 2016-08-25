@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/ivNewFriendLogo"
-        android:layout_width="@dimen/widget_big"
-        android:layout_height="@dimen/widget_big"
+        android:layout_width="@dimen/widget_default"
+        android:layout_height="@dimen/widget_default"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         />

@@ -1,41 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
               android:background="@color/bg_top_black"
               android:orientation="vertical"
+              android:padding="@dimen/space_big"
     >
 
     <TextView
+        android:id="@+id/tvGroupChat"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_default"
-        android:drawableLeft="@drawable/ic_search_white_36dp"
+        android:drawableLeft="@drawable/ic_chat_bubble_white_18dp"
+        android:drawablePadding="@dimen/padding_default"
+        android:gravity="center_vertical"
         android:padding="@dimen/space_small"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/chat_group"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/white_default"
         />
 
     <TextView
+        android:id="@+id/tvScan"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_default"
-        android:drawableLeft="@drawable/ic_search_white_36dp"
+        android:drawableLeft="@drawable/ic_record_voice_over_white_18dp"
+        android:drawablePadding="@dimen/space_big"
+        android:gravity="center_vertical"
         android:padding="@dimen/space_small"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/scan"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/white_default"
+        />
+
+
+    <TextView
+        android:id="@+id/tvAddPerson"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_default"
+        android:drawableLeft="@drawable/ic_person_add_white_18dp"
+        android:drawablePadding="@dimen/space_big"
+        android:gravity="center_vertical"
+        android:padding="@dimen/space_small"
+        android:text="@string/add_friends"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/white_default"
         />
 
     <TextView
+        android:id="@+id/tvHelp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_default"
-        android:drawableLeft="@drawable/ic_search_white_36dp"
+        android:drawableLeft="@drawable/ic_email_white_18dp"
+        android:drawablePadding="@dimen/space_big"
+        android:gravity="center_vertical"
         android:padding="@dimen/space_small"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_default"
-        android:drawableLeft="@drawable/ic_search_white_36dp"
-        android:padding="@dimen/space_small"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/help"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/white_default"
         />
 
 </LinearLayout>

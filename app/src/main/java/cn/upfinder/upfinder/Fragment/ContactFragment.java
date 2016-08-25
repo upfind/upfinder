@@ -1,6 +1,7 @@
 package cn.upfinder.upfinder.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,9 +18,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.newim.bean.BmobIMConversation;
+import cn.upfinder.upfinder.Activity.ChatActivity;
 import cn.upfinder.upfinder.Adapter.ContactAdapter;
 import cn.upfinder.upfinder.Adapter.OnRecyclerViewListener;
 import cn.upfinder.upfinder.Contract.ContactContract;
+import cn.upfinder.upfinder.Model.Bean.Conversation;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.R;
 import cn.upfinder.upfinder.Utils.ToastUtil;
@@ -76,7 +80,11 @@ public class ContactFragment extends Fragment implements ContactContract.View {
         adapter.setOnRecyclerViewListener(new OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position) {
+                Log.d(TAG, "onItemClick: " + adapter.getItem(position));
 
+                //根据选中的好友常见会话 Conversation
+                Friend friend = adapter.getItem(position);
+                presenter.toChatWithFriend(friend);
             }
 
             @Override
@@ -113,6 +121,15 @@ public class ContactFragment extends Fragment implements ContactContract.View {
     @Override
     public void showToast(String msg) {
         ToastUtil.showShort(getContext(), msg);
+    }
+
+    @Override
+    public void jumpToChatActivity(Bundle bundle) {
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
+        if (bundle != null) {
+            intent.putExtra(ChatActivity.INTENT_KEY_CONVERSATION, bundle);
+        }
+        startActivity(intent);
     }
 
 

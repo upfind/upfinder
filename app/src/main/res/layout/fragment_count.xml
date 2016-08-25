@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/ivCountUserLogo"
-            android:layout_width="@dimen/widget_large"
-            android:layout_height="@dimen/widget_large"
+            android:layout_width="@dimen/widget_big"
+            android:layout_height="@dimen/widget_big"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
             android:src="@drawable/img_account_box_grey_600_48dp"
@@ -86,6 +86,34 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:text="@string/setting"
+            android:textSize="@dimen/text_big"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBlurImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_default"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/white_default"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_small"
+        android:paddingLeft="@dimen/padding_default"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/height_mini"
+            android:layout_height="@dimen/height_mini"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_card_giftcard_red_700_24dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="@string/eggs"
             android:textSize="@dimen/text_big"
             />
     </LinearLayout>

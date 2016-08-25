@@ -14,6 +14,8 @@ import cn.bmob.newim.notification.BmobNotificationManager;
 import cn.bmob.v3.exception.BmobException;
 import cn.upfinder.upfinder.Activity.HomeActivity;
 import cn.upfinder.upfinder.Config;
+import cn.upfinder.upfinder.Model.Bean.Relation;
+import cn.upfinder.upfinder.Model.DB.Dao.RelationDao;
 import cn.upfinder.upfinder.Model.UpdateCacheListener;
 import cn.upfinder.upfinder.Model.UserModel;
 
@@ -63,9 +65,9 @@ public class MessageHandler extends BmobIMMessageHandler {
                 if (BmobIMMessageType.getMessageTypeValue(msg.getMsgType()) == 0) {//用户自定义的消息类型，其类型值均为0
                     Log.d(TAG, "done: 处理自定义类型消息");
                     if (msg.getMsgType().equals(Config.MSG_TYPE_ADD_NEW_FRIEND)) { //收到添加好友请求
-
+                        handleAddFriendMsg(msg);
                     } else if (msg.getMsgType().equals(Config.MSG_TYPE_AGREE_ADD_FRIEND)) { //收到同意添加回复
-
+                        handleAgreeAddMsg(msg);
                     }
                 } else { // SDK内部支持的消息类型
                     if (BmobNotificationManager.getInstance(context).isShowNotification()) {//如果需要显示通知栏，SDK提供以下两种显示方式：
@@ -79,15 +81,31 @@ public class MessageHandler extends BmobIMMessageHandler {
 //                        Bitmap largetIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
 //                        BmobNotificationManager.getInstance(context).showNotification(largetIcon,
 //                                info.getName(),msg.getContent(),"您有一条新消息",pendingIntent);
-
                     } else { //直接发送消息事件
                         Log.d(TAG, "done: 发送消息事件 msgEvent");
-
-
                     }
                 }
             }
         });
+    }
+
+    //处理添加好友请求消息
+    private void handleAddFriendMsg(BmobIMMessage message) {
+        /*1.处理信息，获得请求方的账户信息
+        * 2.记录状态，添加至关系表
+        * 3.将请求方账户数据信息缓存至本地
+        * */
+        String fromId = message.getFromId();
+        Relation relation = new Relation(fromId, Relation.ASK_ADD_ME);
+        new RelationDao(context).add(relation);
+
+    }
+
+    //处理同意好友添加请求消息
+    private void handleAgreeAddMsg(BmobIMMessage message) {
+        /*1.对方同意添加后，在关系表中更改与对方关系为好友状态
+        * 2.并改变本地关系表中状态
+        * */
     }
 
 }

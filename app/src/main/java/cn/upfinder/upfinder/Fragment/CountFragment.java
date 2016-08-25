@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.upfinder.upfinder.Activity.BlurImageActivity;
 import cn.upfinder.upfinder.Activity.EditCountInfoActivity;
 import cn.upfinder.upfinder.Activity.LoginActivity;
 import cn.upfinder.upfinder.Contract.CountContract;
@@ -41,8 +42,10 @@ public class CountFragment extends Fragment implements CountContract.View {
     LinearLayout llSetting;
     @BindView(R.id.llExit)
     LinearLayout llExit;
+    @BindView(R.id.llBlurImage)
+    LinearLayout llBlurImage;
 
-    private CountContract.Precenter presenter;
+    private CountContract.Presenter presenter;
 
     public CountFragment() {
         // Required empty public constructor
@@ -80,7 +83,7 @@ public class CountFragment extends Fragment implements CountContract.View {
     }
 
     @Override
-    public void setPresenter(CountContract.Precenter presenter) {
+    public void setPresenter(CountContract.Presenter presenter) {
         this.presenter = presenter;
 
     }
@@ -113,7 +116,7 @@ public class CountFragment extends Fragment implements CountContract.View {
         getActivity().finish();
     }
 
-    @OnClick({R.id.ivCountUserLogo, R.id.ivCountUserQR, R.id.llCountInfo, R.id.llSetting, R.id.llExit})
+    @OnClick({R.id.ivCountUserLogo, R.id.ivCountUserQR, R.id.llCountInfo, R.id.llSetting, R.id.llExit, R.id.llBlurImage})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivCountUserLogo:
@@ -129,6 +132,11 @@ public class CountFragment extends Fragment implements CountContract.View {
             case R.id.llExit:
                 presenter.logOut();
                 break;
+            case R.id.llBlurImage: //跳转到模糊处理图片页面
+                Intent intent = new Intent(getContext(), BlurImageActivity.class);
+                startActivity(intent);
+                break;
         }
     }
+
 }

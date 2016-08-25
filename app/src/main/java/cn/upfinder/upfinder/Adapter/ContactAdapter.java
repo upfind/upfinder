@@ -52,6 +52,10 @@ public class ContactAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public Friend getItem(int position) {
+        return friendList.get(position - headerCount);
+    }
+
     //获取内容部分数据长度
     public int getContentItemCount() {
         return friendList.size();

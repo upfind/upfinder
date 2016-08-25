@@ -46,7 +46,7 @@
             android:hint="请输入新消息"
             android:imeOptions="flagNoExtractUi"
             android:lineSpacingExtra="@dimen/space_small"
-            android:minHeight="@dimen/height_default"
+            android:minHeight="@dimen/height_small"
             android:padding="@dimen/space_small"
             android:textColor="@color/text_gray"
             android:textColorHint="@color/light_gray"

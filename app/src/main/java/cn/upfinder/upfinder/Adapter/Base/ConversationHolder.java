@@ -41,7 +41,6 @@ public class ConversationHolder extends BaseViewHolder<Conversation> {
 
         final PrivateConversation conversation = (PrivateConversation) c;
 
-
         Glide.with(context)
                 .load(conversation.getAvatar())
                 .error(R.drawable.ic_photo_loading)

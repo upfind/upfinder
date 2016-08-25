@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/ivAvatar"
-            android:layout_width="@dimen/widget_big"
-            android:layout_height="@dimen/widget_big"
+            android:layout_width="@dimen/widget_default"
+            android:layout_height="@dimen/widget_default"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:scaleType="fitXY"

@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -49,44 +50,18 @@ public class HomeActivity extends AppCompatActivity {
 
     @BindView(R.id.vpHome)
     NoScrollViewPager vpHome;
-    //    @BindView(R.id.tlHome)
-//    TabLayout tlHome;
     @BindView(R.id.tvTopName)
     TextView tvTopName;
     @BindView(R.id.ivTopMore)
     ImageView ivTopMore;
     @BindView(R.id.ivTopSearch)
     ImageView ivTopSearch;
-    @BindView(R.id.tvBadgeCountNearby)
-    TextView tvBadgeCountNearby;
-    @BindView(R.id.ivBadgeDotNearby)
-    ImageView ivBadgeDotNearby;
-    @BindView(R.id.rlTabNearby)
-    RelativeLayout rlTabNearby;
-    @BindView(R.id.tvBadgeCountFind)
-    TextView tvBadgeCountFind;
-    @BindView(R.id.ivBadgeDotFind)
-    ImageView ivBadgeDotFind;
-    @BindView(R.id.rlTabFind)
-    RelativeLayout rlTabFind;
-    @BindView(R.id.tvBadgeCountMsg)
-    TextView tvBadgeCountMsg;
-    @BindView(R.id.ivBadgeDotMsg)
-    ImageView ivBadgeDotMsg;
-    @BindView(R.id.rlTabMsg)
-    RelativeLayout rlTabMsg;
-    @BindView(R.id.tvBadgeCountMy)
-    TextView tvBadgeCountMy;
-    @BindView(R.id.ivBadgeDotMy)
-    ImageView ivBadgeDotMy;
-    @BindView(R.id.rlTabMy)
-    RelativeLayout rlTabMy;
     @BindView(R.id.rgTabs)
     RadioGroup rgTabs;
     @BindView(R.id.rbTabNearby)
     RadioButton rbTabNearby;
-    @BindView(R.id.rbTabFind)
-    RadioButton rbTabFind;
+    @BindView(R.id.rbTabContact)
+    RadioButton rbTabContact;
     @BindView(R.id.rbTabMsg)
     RadioButton rbTabMsg;
     @BindView(R.id.rbTabMy)
@@ -96,7 +71,6 @@ public class HomeActivity extends AppCompatActivity {
     private Context context;
 
     private PopupWindow popupWindow;
-    private ViewPager.OnPageChangeListener mainViewPagerOnPageChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,27 +110,25 @@ public class HomeActivity extends AppCompatActivity {
 
     //初始化控件
     private void initView() {
-//        tlHome.addTab(tlHome.newTab().setIcon(R.drawable.bg_tabitem_nearby).setText("附近"));
-//        tlHome.addTab(tlHome.newTab().setIcon(R.drawable.bg_tabitem_find).setText("发现"));
-//        tlHome.addTab(tlHome.newTab().setIcon(R.drawable.bg_tabitem_msg).setText("消息"));
-//        tlHome.addTab(tlHome.newTab().setIcon(R.drawable.bg_tabitem_count).setText("我"));
+
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
         NearbyFragment nearbyFragment = NearbyFragment.newInstance("附近", "人");
-        ContactFragment contactFragment = ContactFragment.newInstance("搜索", "人");
         MsgFragment msgFragment = MsgFragment.newInstance();
+        ContactFragment contactFragment = ContactFragment.newInstance("搜索", "人");
         CountFragment countFragment = CountFragment.newInstance();
 
         NearbyPresenter nearbyPresenter = new NearbyPresenter(nearbyFragment);
-        ContactPresenter contactPresenter = new ContactPresenter(this, contactFragment);
         MsgPresenter msgPresenter = new MsgPresenter(msgFragment);
+        ContactPresenter contactPresenter = new ContactPresenter(this, contactFragment);
         CountPresenter countPresenter = new CountPresenter(countFragment);
 
         fragmentArrayList.add(nearbyFragment);
-        fragmentArrayList.add(contactFragment);
         fragmentArrayList.add(msgFragment);
+        fragmentArrayList.add(contactFragment);
         fragmentArrayList.add(countFragment);
         adapter = new HomeVPAdapter(getSupportFragmentManager(), fragmentArrayList);
         vpHome.setAdapter(adapter);
+        vpHome.setCurrentItem(0);
         //当TabLayout中的Item选项中含有图标，或者只含有图标时
         //用这个方法和ViewPager关联式TabLayout会变得什么都没有
         //TabLayout使用时的一个坑
@@ -168,126 +140,44 @@ public class HomeActivity extends AppCompatActivity {
         //关闭ViewPager的左右滑动
         vpHome.setScrollble(false);
 
-        mainViewPagerOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+        rbTabNearby.setChecked(true);
+
+        //监听底部radioGroup的点击
+        rgTabs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                //view pager切换也自动切换Tab状态
-                int currentCheckedId = rgTabs.getCheckedRadioButtonId();
-                int targetCheckId = getTabsCheckedButtonIdFromViewPagerIndex(position, currentCheckedId);
-                if (targetCheckId != currentCheckedId) {
-
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rbTabNearby:
+                        vpHome.setCurrentItem(0, false);
+                        break;
+                    case R.id.rbTabMsg:
+                        vpHome.setCurrentItem(1, false);
+                        break;
+                    case R.id.rbTabContact:
+                        vpHome.setCurrentItem(2, false);
+                        break;
+                    case R.id.rbTabMy:
+                        vpHome.setCurrentItem(3, false);
+                        break;
                 }
-
-                if (position == adapter.FRAGMENT_INDEX_SECOND) {
-                    //第二个Tab, 刷第二页面里的badge number
-
-                }
             }
+        });
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        };
     }
 
-    @OnClick({R.id.ivTopMore, R.id.ivTopSearch, R.id.rlTabNearby, R.id.rlTabFind, R.id.rlTabMsg, R.id.rlTabMy, R.id.rbTabNearby, R.id.rbTabFind, R.id.rbTabMsg, R.id.rbTabMy})
+    @OnClick({R.id.ivTopMore, R.id.ivTopSearch})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivTopMore:  //点击加号 弹出popWindow
                 getPopWindow();
                 //显示
-                popupWindow.showAsDropDown(view, -10, 20);
+                popupWindow.showAsDropDown(view, 0, -20);
                 break;
             case R.id.ivTopSearch: //点击搜索 前往搜索页面搜索
                 Intent intent = new Intent(context, SearchUserActivity.class);
                 startActivity(intent);
                 break;
-
-            case R.id.rlTabNearby:
-                break;
-            case R.id.rlTabFind:
-                break;
-            case R.id.rlTabMsg:
-                break;
-            case R.id.rlTabMy:
-                break;
-
-            case R.id.rbTabNearby:
-                onClickTab(view);
-                break;
-            case R.id.rbTabFind:
-                onClickTab(view);
-                break;
-            case R.id.rbTabMsg:
-                onClickTab(view);
-                break;
-            case R.id.rbTabMy:
-                onClickTab(view);
-                break;
         }
-    }
-
-
-    //tab点击处理
-    private void onClickTab(View view) {
-
-        int currentIndex = vpHome.getCurrentItem();
-        int targetIndex = getViewPagerIndexFromTabsCheckedButtonId(view.getId(), currentIndex);
-        if (targetIndex != currentIndex) {
-            rgTabs.check(view.getId());
-            vpHome.setCurrentItem(targetIndex, false);
-        }
-    }
-
-    private int getViewPagerIndexFromTabsCheckedButtonId(int checkedId, int defaultIndex) {
-        int targetIndex;
-        switch (checkedId) {
-            case R.id.rbTabNearby:
-                targetIndex = adapter.FRAGMENT_INDEX_FIRST;
-                break;
-            case R.id.rbTabFind:
-                targetIndex = adapter.FRAGMENT_INDEX_SECOND;
-                break;
-            case R.id.rbTabMsg:
-                targetIndex = adapter.FRAGMENT_INDEX_THIRD;
-                break;
-            case R.id.rbTabMy:
-                targetIndex = adapter.FRAGMENT_INDEX_FORE;
-                break;
-            default:
-                targetIndex = defaultIndex;
-                break;
-        }
-        return targetIndex;
-    }
-
-    private int getTabsCheckedButtonIdFromViewPagerIndex(int index, int defaultCheckedId) {
-        int targetCheckedId;
-        switch (index) {
-            case HomeVPAdapter.FRAGMENT_INDEX_FIRST:
-                targetCheckedId = R.id.rbTabNearby;
-                break;
-            case HomeVPAdapter.FRAGMENT_INDEX_SECOND:
-                targetCheckedId = R.id.rbTabFind;
-                break;
-            case HomeVPAdapter.FRAGMENT_INDEX_THIRD:
-                targetCheckedId = R.id.rbTabMsg;
-                break;
-            case HomeVPAdapter.FRAGMENT_INDEX_FORE:
-                targetCheckedId = R.id.rbTabMy;
-                break;
-            default:
-                targetCheckedId = defaultCheckedId;
-                break;
-        }
-        return targetCheckedId;
     }
 
     /*创建popWindow
@@ -295,6 +185,30 @@ public class HomeActivity extends AppCompatActivity {
     private void initPopWindow() {
         //获取自定义布局文件
         View popView = getLayoutInflater().inflate(R.layout.pop_top_more_layout, null, false);
+        TextView tvGroupChat = (TextView) popView.findViewById(R.id.tvGroupChat);
+        TextView tvScan = (TextView) popView.findViewById(R.id.tvScan);
+        TextView tvAddPerson = (TextView) popView.findViewById(R.id.tvAddPerson);
+        TextView tvHelp = (TextView) popView.findViewById(R.id.tvHelp);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                switch (v.getId()) {
+                    case R.id.tvGroupChat:
+                    case R.id.tvScan:
+                    case R.id.tvAddPerson:
+                    case R.id.tvHelp:
+                        ToastUtil.showShort(context, "稍后完善！");
+                        break;
+                }
+            }
+        };
+
+        tvGroupChat.setOnClickListener(listener);
+        tvScan.setOnClickListener(listener);
+        tvAddPerson.setOnClickListener(listener);
+        tvHelp.setOnClickListener(listener);
+
         popupWindow = new PopupWindow(popView, 400, ViewGroup.LayoutParams.WRAP_CONTENT, true);
 //        popupWindow.setAnimationStyle(R);
         popView.setOnTouchListener(new View.OnTouchListener() {

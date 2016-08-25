@@ -10,7 +10,7 @@ import cn.upfinder.upfinder.Presenter.BasePresenter;
  */
 public interface CountContract {
 
-    interface View extends BaseView<CountContract.Precenter> {
+    interface View extends BaseView<CountContract.Presenter> {
 
         //显示账户信息
         void showCountInfo(User user);
@@ -25,7 +25,7 @@ public interface CountContract {
         void jumpToLoginActivity();
     }
 
-    interface Precenter extends BasePresenter {
+    interface Presenter extends BasePresenter {
 
         //刷新账户信息数据
         void refreshCountInfo();

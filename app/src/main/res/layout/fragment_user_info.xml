@@ -7,12 +7,17 @@
     tools:context="cn.upfinder.upfinder.Fragment.UserInfoFragment"
     >
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_default"
+        layout="@layout/layout_toolbar" />
 
     <LinearLayout
+
         android:id="@+id/llCountInfo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_xlarge"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/height_big"
         android:background="@color/white_default"
         android:orientation="horizontal"
         android:padding="@dimen/padding_default"
@@ -32,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
+
             android:paddingLeft="@dimen/padding_default"
             android:paddingTop="@dimen/padding_default"
             >

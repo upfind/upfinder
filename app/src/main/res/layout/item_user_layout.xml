@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/ivUserLogo"
-        android:layout_width="@dimen/widget_big"
-        android:layout_height="@dimen/widget_big"
+        android:layout_width="@dimen/widget_default"
+        android:layout_height="@dimen/widget_default"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         />
@@ -40,7 +40,7 @@
         android:layout_toRightOf="@+id/ivUserLogo"
         android:maxLines="2"
         android:text="Medium Text很多狠毒扥花llla nbd jjaikaikj kijaisaka anhifja kjaifjiacakjfia kjaijamckajif"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         />
 
 </RelativeLayout>

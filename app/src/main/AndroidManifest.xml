@@ -102,6 +102,8 @@
         </activity>
         <activity android:name=".Activity.NewFriendActivity">
         </activity>
+        <activity android:name=".Activity.BlurImageActivity">
+        </activity>
     </application>
 
 </manifest>

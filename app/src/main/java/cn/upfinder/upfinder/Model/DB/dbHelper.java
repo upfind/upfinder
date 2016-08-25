@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.upfinder.upfinder.Model.Bean.Contact;
+import cn.upfinder.upfinder.Model.Bean.Relation;
+import cn.upfinder.upfinder.Utils.ToastUtil;
 
 /**
  * Created by upfinder on 2016/8/10 0010.
@@ -62,6 +64,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         Log.d(TAG, "onCreate: 创建SQLLite数据库");
         try {
             TableUtils.createTable(connectionSource, Contact.class);
+            TableUtils.createTable(connectionSource,Relation.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,6 +75,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
         try {
             TableUtils.dropTable(connectionSource, Contact.class, true);
+            TableUtils.dropTable(connectionSource, Relation.class,true);
         } catch (SQLException e) {
             e.printStackTrace();
         }

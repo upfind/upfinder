@@ -12,6 +12,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        /*模糊图片所需的支持*/
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true;
     }
     buildTypes {
         release {

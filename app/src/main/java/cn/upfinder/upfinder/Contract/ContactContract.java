@@ -1,5 +1,7 @@
 package cn.upfinder.upfinder.Contract;
 
+import android.os.Bundle;
+
 import java.util.List;
 
 import cn.upfinder.upfinder.Fragment.BaseView;
@@ -19,6 +21,9 @@ public interface ContactContract {
 
         //Toast展示提示
         void showToast(String msg);
+
+        //跳转到聊天页面
+        void jumpToChatActivity(Bundle bundle);
     }
 
     interface Presenter extends BasePresenter {
@@ -31,6 +36,9 @@ public interface ContactContract {
 
         //加载数据库缓存数据
         void obtainDBContactData();
+
+        //发送消息给好友
+        void toChatWithFriend(Friend friend);
 
         //加载数据 1.获取当前数据库缓存数据 2.若数据库中没有缓存则加载服务器并同时缓存到数据库 3.当下拉刷新时拉取服务器
 
