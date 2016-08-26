@@ -20,6 +20,7 @@ import cn.bmob.newim.bean.BmobIMSendStatus;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
 import cn.upfinder.upfinder.Model.UserModel;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Widget.GlideCircleTransform;
 
 /**
  * Created by Administrator on 2016/8/2 0002.
@@ -82,6 +83,9 @@ public class SendImageHolder extends BaseViewHolder<BmobIMMessage> {
         Log.d(TAG, "bindData: " + avatarUri);
         Glide.with(getContext())
                 .load(avatarUri)
+                .transform(new GlideCircleTransform(getContext())) //圆形图
+                .placeholder(R.drawable.ic_photo_loading)
+                .crossFade()
                 .error(R.drawable.ic_photo_loading)
                 .into(ivAvatar);
     }

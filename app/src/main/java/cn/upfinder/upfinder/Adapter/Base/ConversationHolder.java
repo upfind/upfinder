@@ -16,6 +16,7 @@ import cn.upfinder.upfinder.Adapter.OnRecyclerViewListener;
 import cn.upfinder.upfinder.Model.Bean.Conversation;
 import cn.upfinder.upfinder.Model.Bean.PrivateConversation;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Widget.GlideCircleTransform;
 
 /**
  * Created by upfinder on 2016/8/4 0004.
@@ -44,6 +45,9 @@ public class ConversationHolder extends BaseViewHolder<Conversation> {
         Glide.with(context)
                 .load(conversation.getAvatar())
                 .error(R.drawable.ic_photo_loading)
+                .transform(new GlideCircleTransform(getContext())) //圆形图
+                .placeholder(R.drawable.ic_photo_loading)
+                .crossFade()
                 .into(ivMsgFromLogo);
         tvMsgFrom.setText(conversation.getcName());
         Log.d(TAG, "onBindViewHolder: " + conversation.getcName());

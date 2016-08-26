@@ -13,6 +13,7 @@ import cn.upfinder.upfinder.Model.Bean.Contacts;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Widget.GlideCircleTransform;
 
 /**
  * Created by upfinder on 2016/8/9 0009.
@@ -36,6 +37,9 @@ public class ContactHolder extends BaseViewHolder<Contacts> {
         Glide.with(getContext())
                 .load(contacts.getUserAvatar())
                 .error(R.drawable.ic_photo_loading)
+                .transform(new GlideCircleTransform(getContext())) //圆形图
+                .placeholder(R.drawable.ic_photo_loading)
+                .crossFade()
                 .into(ivUserLogo);
         tvUserName.setText(contacts.getNickName());
         tvUserSign.setText(contacts.getUserCount());

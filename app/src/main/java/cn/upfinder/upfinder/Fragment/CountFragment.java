@@ -23,6 +23,7 @@ import cn.upfinder.upfinder.Activity.LoginActivity;
 import cn.upfinder.upfinder.Contract.CountContract;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Widget.GlideRoundTransform;
 
 
 public class CountFragment extends Fragment implements CountContract.View {
@@ -92,7 +93,10 @@ public class CountFragment extends Fragment implements CountContract.View {
     public void showCountInfo(User user) {
         Glide.with(getActivity())
                 .load(user.getAvatar())
+                .transform(new GlideRoundTransform(getContext(), 12))
+                .placeholder(R.drawable.ic_photo_loading)
                 .error(R.drawable.img_account_box_grey_600_48dp)
+                .crossFade()
                 .into(ivCountUserLogo);
         tvCountUserNick.setText(user.getNick());
         tvCountNum.setText(user.getUsername());

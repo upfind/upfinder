@@ -18,6 +18,7 @@ import cn.bmob.newim.bean.BmobIMImageMessage;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Widget.GlideCircleTransform;
 
 /**
  * Created by upfinder on 2016/8/2 0002.
@@ -52,11 +53,15 @@ public class ReceiveImageHolder extends BaseViewHolder<BmobIMMessage> {
         Glide.with(context)
                 .load(imageMessage.getRemoteUrl())
                 .into(ivMsgContent)
+
                 .onLoadFailed(new Exception("加载失败"), context.getDrawable(R.drawable.ic_photo_loading));
 
         String avatarUri = message.getBmobIMConversation().getConversationIcon();
         Glide.with(getContext())
                 .load(avatarUri)
+                .transform(new GlideCircleTransform(getContext())) //圆形图
+                .placeholder(R.drawable.ic_photo_loading)
+                .crossFade()
                 .error(R.drawable.ic_photo_loading)
                 .into(ivAvatar);
     }

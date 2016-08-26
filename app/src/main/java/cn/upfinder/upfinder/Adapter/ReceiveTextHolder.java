@@ -14,6 +14,7 @@ import butterknife.BindView;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Widget.GlideCircleTransform;
 
 /**
  * Created by upfinder on 2016/7/28 0028.
@@ -42,6 +43,9 @@ public class ReceiveTextHolder extends BaseViewHolder<BmobIMMessage> {
         String avatarUri = message.getBmobIMConversation().getConversationIcon();
         Glide.with(getContext())
                 .load(avatarUri)
+                .transform(new GlideCircleTransform(getContext())) //圆形图
+                .placeholder(R.drawable.ic_photo_loading)
+                .crossFade()
                 .error(R.drawable.ic_photo_loading)
                 .into(ivAvatar);
 

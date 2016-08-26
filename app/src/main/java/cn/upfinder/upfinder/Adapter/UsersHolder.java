@@ -11,6 +11,7 @@ import butterknife.BindView;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Widget.GlideCircleTransform;
 
 /**
  * Created by upfinder on 2016/7/29 0029.
@@ -34,6 +35,9 @@ public class UsersHolder extends BaseViewHolder<User> {
         Glide.with(getContext())
                 .load(user.getAvatar())
                 .error(R.drawable.ic_photo_loading)
+                .transform(new GlideCircleTransform(getContext())) //圆形图
+                .placeholder(R.drawable.ic_photo_loading)
+                .crossFade()
                 .into(ivUserLogo);
         tvUserName.setText(user.getNick() + "(" + user.getUsername() + ")");
         tvUserSign.setText(user.getSign());
