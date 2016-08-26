@@ -99,8 +99,10 @@ public class NewFriendFragment extends Fragment implements NewFriendContract.Vie
         }
     }
 
+
     @Override
     public void showAllNewFriend(List<NewFriend> newFriendList) {
+
         adapter.setFriendList(newFriendList);
         adapter.notifyDataSetChanged();
     }

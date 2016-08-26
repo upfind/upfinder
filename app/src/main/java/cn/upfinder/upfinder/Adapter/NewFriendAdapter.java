@@ -1,8 +1,6 @@
 package cn.upfinder.upfinder.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.upfinder.upfinder.Activity.SearchUserActivity;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
 import cn.upfinder.upfinder.Model.Bean.NewFriend;
 import cn.upfinder.upfinder.R;
@@ -101,7 +100,7 @@ public class NewFriendAdapter extends RecyclerView.Adapter {
         } else if (holder instanceof FooterViewHolder) {
             ((FooterViewHolder) holder).bindData(null);
         } else if (holder instanceof ContentViewHolder) {
-            ((ContentViewHolder) holder).bindData(newFriendList.get(position));
+            ((ContentViewHolder) holder).bindData(newFriendList.get(position - headerCount));
         } else {
             return;
         }
@@ -116,6 +115,9 @@ public class NewFriendAdapter extends RecyclerView.Adapter {
     *Content部分ViewHolder
      * */
     public class ContentViewHolder extends BaseViewHolder<NewFriend> {
+
+
+        private NewFriend newFriend;
 
         @BindView(R.id.ivNewFriendLogo)
         ImageView ivNewFriendLogo;
@@ -132,15 +134,47 @@ public class NewFriendAdapter extends RecyclerView.Adapter {
 
         @Override
         public void bindData(NewFriend newFriend) {
+            this.newFriend = newFriend;
+            tvNewFriendName.setText(newFriend.getUserName());
+            Glide.with(context)
+                    .load(newFriend.getUserAvatar())
+                    .error(R.drawable.ic_photo_loading)
+                    .into(ivNewFriendLogo);
+            tvNewFriendSign.setText(newFriend.getAddReason());
 
+            switch (newFriend.getStatus()) {
+                case NewFriend.ASK_ADD_ME:
+                    btnNewFriendActive.setText(R.string.add_friends);
+                    break;
+                case NewFriend.I_ASK_ADD:
+                    btnNewFriendActive.setText("已添加");
+                    btnNewFriendActive.setBackgroundColor(context.getResources().getColor(R.color.light_gray));
+                    break;
+                case NewFriend.HAS_FRIEND:
+                    btnNewFriendActive.setText("已添加");
+                    btnNewFriendActive.setBackgroundColor(context.getResources().getColor(R.color.light_gray));
+                    break;
+            }
         }
 
         @OnClick({R.id.ivNewFriendLogo, R.id.btnNewFriendActive})
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.ivNewFriendLogo:
+
                     break;
                 case R.id.btnNewFriendActive:
+                    switch (newFriend.getStatus()) {
+                        case NewFriend.ASK_ADD_ME:
+                            Log.d(TAG, "onClick: 请求添加我为好友，同意添加" + newFriend.getUserName());
+                            break;
+                        case NewFriend.HAS_FRIEND:
+                            Log.d(TAG, "onClick: 已是好友" + newFriend.getUserName());
+                            break;
+                        case NewFriend.I_ASK_ADD:
+                            Log.d(TAG, "onClick: 已是好友" + newFriend.getUserName());
+                            break;
+                    }
                     break;
             }
         }

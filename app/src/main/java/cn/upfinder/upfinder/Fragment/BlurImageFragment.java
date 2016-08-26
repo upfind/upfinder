@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.upfinder.upfinder.Contract.BlurImageContract;
 import cn.upfinder.upfinder.R;
 import cn.upfinder.upfinder.Utils.BlurBitmapUtil;
@@ -22,6 +23,10 @@ import cn.upfinder.upfinder.Utils.BlurBitmapUtil;
 
 public class BlurImageFragment extends Fragment implements BlurImageContract.View {
 
+    @BindView(R.id.btn_back)
+    ImageView btnBack;
+    @BindView(R.id.tvPagerName)
+    TextView tvPagerName;
     private BlurImageContract.Presenter presenter;
 
     @BindView(R.id.ivBlur)
@@ -72,6 +77,8 @@ public class BlurImageFragment extends Fragment implements BlurImageContract.Vie
         super.onViewCreated(view, savedInstanceState);
         this.presenter.start();
 
+        tvPagerName.setText("彩蛋");
+
         //获取图片
         tempBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_girl);
         finalBitmap = BlurBitmapUtil.blur(getContext(), tempBitmap);
@@ -110,5 +117,10 @@ public class BlurImageFragment extends Fragment implements BlurImageContract.Vie
     @Override
     public void setPresenter(BlurImageContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @OnClick({R.id.btn_back,R.id.tvPagerName})
+    public void onClick() {
+        getActivity().finish();
     }
 }

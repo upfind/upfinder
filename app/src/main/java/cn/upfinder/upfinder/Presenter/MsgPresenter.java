@@ -42,7 +42,6 @@ public class MsgPresenter implements MsgContract.Precenter {
                 switch (item.getConversationType()) {
                     case 1: // 私聊
                         privateConversation.add(new PrivateConversation(item));
-
                         break;
                     default:
                         break;

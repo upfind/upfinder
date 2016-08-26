@@ -5,7 +5,6 @@
     android:layout_height="@dimen/height_big"
     android:orientation="vertical">
 
-
     <View
         android:id="@+id/radioSplit"
         android:layout_width="wrap_content"
@@ -58,9 +57,6 @@
             android:text="@string/tab_contact"
             android:textSize="13sp"/>
 
-
-
-
         <RadioButton
             android:id="@+id/rbTabMy"
             style="@style/radioButton"
@@ -71,7 +67,5 @@
             android:drawableTop="@drawable/bg_tabitem_count"
             android:text="@string/tab_count"
             android:textSize="13sp"/>
-
-
     </RadioGroup>
 </LinearLayout>

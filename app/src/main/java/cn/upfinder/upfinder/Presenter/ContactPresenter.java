@@ -14,12 +14,10 @@ import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.v3.listener.FindListener;
 import cn.upfinder.upfinder.Activity.ChatActivity;
 import cn.upfinder.upfinder.Contract.ContactContract;
-import cn.upfinder.upfinder.Model.Bean.Contact;
+import cn.upfinder.upfinder.Model.Bean.Contacts;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.Model.Bean.PrivateConversation;
-import cn.upfinder.upfinder.Model.DB.DBHelper;
 import cn.upfinder.upfinder.Model.DB.Dao.ContactDao;
-import cn.upfinder.upfinder.Model.DB.Dao.FriendDao;
 import cn.upfinder.upfinder.Model.UserModel;
 
 /**
@@ -39,7 +37,7 @@ public class ContactPresenter implements ContactContract.Presenter {
 
     @Override
     public void start() {
-        obtainContactData();
+        obtainDBContactData();
     }
 
     @Override
@@ -50,7 +48,7 @@ public class ContactPresenter implements ContactContract.Presenter {
             @Override
             public void onSuccess(List<Friend> list) {
                 Log.d(TAG, "onSuccess: 加载到好友" + list.size());
-                contactView.showContacts(list);
+                contactView.showContacts(transData(list));
             }
 
             @Override
@@ -70,17 +68,20 @@ public class ContactPresenter implements ContactContract.Presenter {
     @Override
     public void obtainDBContactData() {
         try {
-            List<Contact> contactList = new ContactDao(context).query();
+            List<Contacts> contactList = new ContactDao(context).query();
+            contactView.showContacts(contactList);
+            Log.d(TAG, "obtainDBContactData: 加载到本地缓存联系人数据" + contactList.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void toChatWithFriend(Friend friend) {
+    public void toChatWithFriend(Contacts contacts) {
 
         //构造对方的
-        BmobIMUserInfo userInfo = new BmobIMUserInfo(friend.getFriendUser().getObjectId(), friend.getFriendUser().getUsername(), friend.getFriendUser().getAvatar());
+//        BmobIMUserInfo userInfo = new BmobIMUserInfo(friend.getFriendUser().getObjectId(), friend.getFriendUser().getUsername(), friend.getFriendUser().getAvatar());
+        BmobIMUserInfo userInfo = new BmobIMUserInfo(contacts.getUserObjectId(), contacts.getNickName(), contacts.getUserAvatar());
         //启动一个会话
         BmobIMConversation c = BmobIM.getInstance().startPrivateConversation(userInfo, false, null);
         PrivateConversation conversation = new PrivateConversation(c);
@@ -91,13 +92,16 @@ public class ContactPresenter implements ContactContract.Presenter {
     }
 
     @Override
-    public List<Contact> transData(List<Friend> friendList) {
-        List<Contact> contactList = new ArrayList<>();
+    public List<Contacts> transData(List<Friend> friendList) {
+        new ContactDao(context).delAllContacts();
+        List<Contacts> contactList = new ArrayList<>();
         for (Friend friend : friendList) {
-            Contact contact = new Contact();
+            Contacts contact = new Contacts();
             contact.setUserAvatar(friend.getFriendUser().getAvatar());
             contact.setNickName(friend.getFriendUser().getNick());
             contact.setUserObjectId(friend.getFriendUser().getObjectId());
+            //更新本地缓存表
+            new ContactDao(context).add(contact);
             contactList.add(contact);
         }
         return contactList;

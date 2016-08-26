@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,10 +7,15 @@
     tools:context="cn.upfinder.upfinder.Fragment.BlurImageFragment"
     >
 
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_default"
+        layout="@layout/layout_toolbar"
+        />
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/height_default"
         >
 
         <ImageView
@@ -29,26 +34,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_xlarge"
-        android:orientation="vertical"
+        android:layout_height="@dimen/height_default"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_translucent"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
         >
 
         <SeekBar
             android:id="@+id/sbBlur"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/padding_default"
+
             />
 
         <TextView
             android:id="@+id/tvBlurProgress"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/height_small"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="0"
             android:textSize="@dimen/text_large"
+            android:gravity="center"
             />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

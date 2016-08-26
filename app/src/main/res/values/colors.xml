@@ -13,4 +13,6 @@
     <color name="text_gray">#6b6b6b</color>
     <color name="text_default">#3e3e3e</color>
 
+    <color name="bg_translucent">#b9b1b0b0</color>
+
 </resources>

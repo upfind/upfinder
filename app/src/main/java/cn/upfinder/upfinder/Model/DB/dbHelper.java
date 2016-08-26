@@ -13,23 +13,23 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.upfinder.upfinder.Model.Bean.Contact;
-import cn.upfinder.upfinder.Model.Bean.Relation;
-import cn.upfinder.upfinder.Utils.ToastUtil;
+import cn.upfinder.upfinder.Model.Bean.Contacts;
+import cn.upfinder.upfinder.Model.Bean.NewFriend;
 
 /**
  * Created by upfinder on 2016/8/10 0010.
  */
 public class DBHelper extends OrmLiteSqliteOpenHelper {
     private final String TAG = DBHelper.class.getSimpleName();
-    private static final String TABLE_NAME = "sl_upfinder.db";
-    private Map<String,Dao> daos = new HashMap<>();
-
+    private static final String TABLE_NAME = "sl-upfinder.db";
+    private Map<String, Dao> daos = new HashMap<>();
 
     private static DBHelper instance;
 
+
     //单例获取Helper
     public static synchronized DBHelper getInstance(Context context) {
+        context = context.getApplicationContext();
         if (instance == null) {
             synchronized (DBHelper.class) {
                 if (instance == null) {
@@ -45,16 +45,18 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     }
 
 
+
+
     //获得contactDao
     public synchronized Dao getDao(Class clazz) throws SQLException {
         Dao dao = null;
         String className = clazz.getSimpleName();
-        if (daos.containsKey(className)){
+        if (daos.containsKey(className)) {
             dao = daos.get(className);
         }
-        if (dao == null){
+        if (dao == null) {
             dao = super.getDao(clazz);
-            daos.put(className,dao);
+            daos.put(className, dao);
         }
         return dao;
     }
@@ -63,8 +65,8 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         Log.d(TAG, "onCreate: 创建SQLLite数据库");
         try {
-            TableUtils.createTable(connectionSource, Contact.class);
-            TableUtils.createTable(connectionSource,Relation.class);
+            TableUtils.createTable(connectionSource, Contacts.class);
+            TableUtils.createTable(connectionSource, NewFriend.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,9 +75,11 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
 
+        Log.d(TAG, "onUpgrade: 数据库升级" + i + "//" + i1);
         try {
-            TableUtils.dropTable(connectionSource, Contact.class, true);
-            TableUtils.dropTable(connectionSource, Relation.class,true);
+            TableUtils.dropTable(connectionSource, Contacts.class, true);
+            TableUtils.dropTable(connectionSource, NewFriend.class, true);
+            onCreate(sqLiteDatabase, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,7 +89,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        for (String key : daos.keySet()){
+        for (String key : daos.keySet()) {
             Dao dao = daos.get(key);
             dao = null;
         }

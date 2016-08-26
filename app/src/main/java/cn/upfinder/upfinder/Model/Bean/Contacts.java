@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 
 @DatabaseTable(tableName = "tb_contact")
-public class Contact {
+public class Contacts {
 
     @DatabaseField(generatedId = true)
     private int id;

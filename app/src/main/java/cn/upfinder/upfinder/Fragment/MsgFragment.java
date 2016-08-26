@@ -127,6 +127,7 @@ public class MsgFragment extends Fragment implements MsgContract.View {
             @Override
             public void onRefresh() {
                 Log.d(TAG, "onRefresh: 正在刷新");
+                swRefresh.setRefreshing(false);
             }
         });
     }

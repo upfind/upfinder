@@ -2,11 +2,13 @@ package cn.upfinder.upfinder.Handler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.bmob.newim.bean.BmobIMMessageType;
-import cn.bmob.newim.bean.BmobIMSendStatus;
+import cn.bmob.newim.bean.BmobIMUserInfo;
 import cn.bmob.newim.event.MessageEvent;
 import cn.bmob.newim.event.OfflineMessageEvent;
 import cn.bmob.newim.listener.BmobIMMessageHandler;
@@ -14,8 +16,8 @@ import cn.bmob.newim.notification.BmobNotificationManager;
 import cn.bmob.v3.exception.BmobException;
 import cn.upfinder.upfinder.Activity.HomeActivity;
 import cn.upfinder.upfinder.Config;
-import cn.upfinder.upfinder.Model.Bean.Relation;
-import cn.upfinder.upfinder.Model.DB.Dao.RelationDao;
+import cn.upfinder.upfinder.Model.Bean.NewFriend;
+import cn.upfinder.upfinder.Model.DB.Dao.NewFriendDao;
 import cn.upfinder.upfinder.Model.UpdateCacheListener;
 import cn.upfinder.upfinder.Model.UserModel;
 
@@ -31,6 +33,18 @@ public class MessageHandler extends BmobIMMessageHandler {
     public MessageHandler(Context context) {
         this.context = context;
     }
+
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Log.d(TAG, "handleMessage: 成功");
+                    break;
+            }
+            return false;
+        }
+    });
 
 
     /*
@@ -60,12 +74,13 @@ public class MessageHandler extends BmobIMMessageHandler {
             @Override
             public void done(BmobException e) {
                 BmobIMMessage msg = messageEvent.getMessage();
+                BmobIMUserInfo userInfo = messageEvent.getFromUserInfo();
                 int type = BmobIMMessageType.getMessageTypeValue(msg.getMsgType());
                 Log.d(TAG, "done: " + type);
                 if (BmobIMMessageType.getMessageTypeValue(msg.getMsgType()) == 0) {//用户自定义的消息类型，其类型值均为0
                     Log.d(TAG, "done: 处理自定义类型消息");
                     if (msg.getMsgType().equals(Config.MSG_TYPE_ADD_NEW_FRIEND)) { //收到添加好友请求
-                        handleAddFriendMsg(msg);
+                        handleAddFriendMsg(userInfo);
                     } else if (msg.getMsgType().equals(Config.MSG_TYPE_AGREE_ADD_FRIEND)) { //收到同意添加回复
                         handleAgreeAddMsg(msg);
                     }
@@ -90,15 +105,18 @@ public class MessageHandler extends BmobIMMessageHandler {
     }
 
     //处理添加好友请求消息
-    private void handleAddFriendMsg(BmobIMMessage message) {
-        /*1.处理信息，获得请求方的账户信息
+    private void handleAddFriendMsg(BmobIMUserInfo userInfo) {
+        /*1.处理信息，获得请求方的账户信息upfinder
         * 2.记录状态，添加至关系表
         * 3.将请求方账户数据信息缓存至本地
         * */
-        String fromId = message.getFromId();
-        Relation relation = new Relation(fromId, Relation.ASK_ADD_ME);
-        new RelationDao(context).add(relation);
-
+        String fromId = userInfo.getUserId();
+        String userAvatar = userInfo.getAvatar();
+        String userName = userInfo.getName();
+        NewFriend newFriend = new NewFriend(fromId, NewFriend.ASK_ADD_ME);
+        newFriend.setUserAvatar(userAvatar);
+        newFriend.setUserName(userName);
+        new NewFriendDao(context).add(newFriend);
     }
 
     //处理同意好友添加请求消息

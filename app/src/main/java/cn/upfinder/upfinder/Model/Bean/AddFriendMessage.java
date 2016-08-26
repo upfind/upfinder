@@ -31,18 +31,18 @@ public class AddFriendMessage extends BmobIMExtraMessage {
     public static NewFriend convert(BmobIMMessage msg) {
         NewFriend add = new NewFriend();
         String content = msg.getContent();
-        add.setMsg(content);
-        add.setTime(msg.getCreateTime());
+        add.setAddReason(content);
+        add.setReciveTime(msg.getCreateTime());
         add.setStatus(Config.STATUS_VERIFY_NONE);
         try {
             String extra = msg.getExtra();
             if (!TextUtils.isEmpty(extra)) {
                 JSONObject json = new JSONObject(extra);
                 String name = json.getString("name");
-                add.setName(name);
+                add.setUserName(name);
                 String avatar = json.getString("avatar");
-                add.setAvatar(avatar);
-                add.setUid(json.getString("uid"));
+                add.setUserAvatar(avatar);
+                add.setTargetId(json.getString("uid"));
             } else {
                 Log.d(TAG, "AddFriendMessage的extra为空");
             }

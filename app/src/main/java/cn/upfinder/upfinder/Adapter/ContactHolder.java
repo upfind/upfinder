@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
+import cn.upfinder.upfinder.Model.Bean.Contacts;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
@@ -17,7 +18,7 @@ import cn.upfinder.upfinder.R;
  * Created by upfinder on 2016/8/9 0009.
  * 联系人列表 adapter的ViewHolder
  */
-public class ContactHolder extends BaseViewHolder<Friend> {
+public class ContactHolder extends BaseViewHolder<Contacts> {
     @BindView(R.id.ivUserLogo)
     ImageView ivUserLogo;
     @BindView(R.id.tvUserName)
@@ -30,14 +31,13 @@ public class ContactHolder extends BaseViewHolder<Friend> {
     }
 
     @Override
-    public void bindData(Friend friend) {
+    public void bindData(Contacts contacts) {
 
-        User user = friend.getFriendUser();
         Glide.with(getContext())
-                .load(user.getAvatar())
+                .load(contacts.getUserAvatar())
                 .error(R.drawable.ic_photo_loading)
                 .into(ivUserLogo);
-        tvUserName.setText(user.getNick());
-        tvUserSign.setText(user.getUsername());
+        tvUserName.setText(contacts.getNickName());
+        tvUserSign.setText(contacts.getUserCount());
     }
 }

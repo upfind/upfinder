@@ -7,7 +7,7 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import cn.upfinder.upfinder.Model.Bean.Contact;
+import cn.upfinder.upfinder.Model.Bean.Contacts;
 import cn.upfinder.upfinder.Model.DB.DBHelper;
 
 /**
@@ -16,14 +16,14 @@ import cn.upfinder.upfinder.Model.DB.DBHelper;
 public class ContactDao {
 
     private Context context;
-    private Dao<Contact,Integer> contactDaoOpe;
+    private Dao<Contacts, Integer> contactDaoOpe;
     private DBHelper helper;
 
-    public ContactDao(Context context){
+    public ContactDao(Context context) {
         this.context = context;
         try {
             helper = DBHelper.getInstance(context);
-            contactDaoOpe = helper.getDao(Contact.class);
+            contactDaoOpe = helper.getDao(Contacts.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,7 +32,7 @@ public class ContactDao {
     /*
     *添加一个联系人
     * */
-    public void add(Contact contact){
+    public void add(Contacts contact) {
         try {
             contactDaoOpe.create(contact);
         } catch (SQLException e) {
@@ -41,10 +41,34 @@ public class ContactDao {
     }
 
     /*
+    * 更新一个联系人
+    * */
+    public void upContacts(Contacts contacts) {
+        try {
+            contactDaoOpe.update(contacts);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
     * 查询所有联系人数据
     * */
-    public List<Contact> query() throws SQLException {
-        List<Contact> contactList = contactDaoOpe.queryForAll();
+    public List<Contacts> query() throws SQLException {
+        List<Contacts> contactList = contactDaoOpe.queryForAll();
         return contactList;
+    }
+
+    /*
+    * 删除本地缓存的所有联系人
+    * */
+    public void delAllContacts() {
+        for (Contacts contacts : contactDaoOpe) {
+            try {
+                contactDaoOpe.delete(contacts);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

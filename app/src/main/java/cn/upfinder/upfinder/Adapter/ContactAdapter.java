@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.upfinder.upfinder.Activity.NewFriendActivity;
 import cn.upfinder.upfinder.Adapter.Base.BaseViewHolder;
+import cn.upfinder.upfinder.Model.Bean.Contacts;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.R;
 
@@ -28,7 +29,7 @@ public class ContactAdapter extends RecyclerView.Adapter {
     private static final int ITEM_TYPE_FOOTER = 1;
     private static final int ITEM_TYPE_CONTENT = 2;
 
-    private List<Friend> friendList = new ArrayList<>();
+    private List<Contacts> contactsList = new ArrayList<>();
     private OnRecyclerViewListener onRecyclerViewListener;
     private Context context;
 
@@ -40,25 +41,25 @@ public class ContactAdapter extends RecyclerView.Adapter {
         this.context = context;
     }
 
-    public void setFriendList(List<Friend> friendList) {
-        if (friendList != null) {
-            this.friendList.clear();
-            this.friendList.addAll(friendList);
+    public void setFriendList(List<Contacts> contactsList) {
+        if (contactsList != null) {
+            this.contactsList.clear();
+            this.contactsList.addAll(contactsList);
             notifyDataSetChanged();
         } else {
-            this.friendList = new ArrayList<>();
-            this.friendList.addAll(friendList);
+            this.contactsList = new ArrayList<>();
+            this.contactsList.addAll(contactsList);
             notifyDataSetChanged();
         }
     }
 
-    public Friend getItem(int position) {
-        return friendList.get(position - headerCount);
+    public Contacts getItem(int position) {
+        return contactsList.get(position - headerCount);
     }
 
     //获取内容部分数据长度
     public int getContentItemCount() {
-        return friendList.size();
+        return contactsList.size();
     }
 
 
@@ -94,7 +95,7 @@ public class ContactAdapter extends RecyclerView.Adapter {
         if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).bindData(null);
         } else if (holder instanceof ContactHolder) {
-            ((ContactHolder) holder).bindData(friendList.get(position - headerCount));
+            ((ContactHolder) holder).bindData(contactsList.get(position - headerCount));
         } else {
             return;
         }

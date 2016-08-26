@@ -23,11 +23,13 @@ import cn.upfinder.upfinder.Activity.ChatActivity;
 import cn.upfinder.upfinder.Adapter.ContactAdapter;
 import cn.upfinder.upfinder.Adapter.OnRecyclerViewListener;
 import cn.upfinder.upfinder.Contract.ContactContract;
+import cn.upfinder.upfinder.Model.Bean.Contacts;
 import cn.upfinder.upfinder.Model.Bean.Conversation;
 import cn.upfinder.upfinder.Model.Bean.Friend;
 import cn.upfinder.upfinder.R;
 import cn.upfinder.upfinder.Utils.ToastUtil;
 
+/*联系人界面，好友列表展示*/
 public class ContactFragment extends Fragment implements ContactContract.View {
     private final String TAG = ContactFragment.class.getSimpleName();
 
@@ -81,10 +83,9 @@ public class ContactFragment extends Fragment implements ContactContract.View {
             @Override
             public void onItemClick(int position) {
                 Log.d(TAG, "onItemClick: " + adapter.getItem(position));
-
                 //根据选中的好友常见会话 Conversation
-                Friend friend = adapter.getItem(position);
-                presenter.toChatWithFriend(friend);
+                Contacts contacts = adapter.getItem(position);
+                presenter.toChatWithFriend(contacts);
             }
 
             @Override
@@ -96,9 +97,16 @@ public class ContactFragment extends Fragment implements ContactContract.View {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rcContact.setLayoutManager(linearLayoutManager);
 
-        adapter.setFriendList(new ArrayList<Friend>());
+        adapter.setFriendList(new ArrayList<Contacts>());
         rcContact.setAdapter(adapter);
         Log.d(TAG, "initView:初始化界面 " + adapter.getItemCount());
+        swRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.obtainContactData();
+                swRefresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -114,8 +122,8 @@ public class ContactFragment extends Fragment implements ContactContract.View {
     }
 
     @Override
-    public void showContacts(List<Friend> friendList) {
-        adapter.setFriendList(friendList);
+    public void showContacts(List<Contacts> contactsList) {
+        adapter.setFriendList(contactsList);
     }
 
     @Override
