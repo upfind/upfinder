@@ -57,6 +57,7 @@
                     android:id="@+id/etLoginPwd"
                     style="@style/EditTextSingle"
                     android:layout_width="match_parent"
+                    android:inputType="textPassword"
                     android:layout_height="@dimen/height_default"
                     android:hint="@string/user_pwd"
                     />

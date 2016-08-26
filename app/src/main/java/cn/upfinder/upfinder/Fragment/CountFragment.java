@@ -93,7 +93,7 @@ public class CountFragment extends Fragment implements CountContract.View {
     public void showCountInfo(User user) {
         Glide.with(getActivity())
                 .load(user.getAvatar())
-                .transform(new GlideRoundTransform(getContext(), 12))
+                .transform(new GlideRoundTransform(getContext(), 20))
                 .placeholder(R.drawable.ic_photo_loading)
                 .error(R.drawable.img_account_box_grey_600_48dp)
                 .crossFade()
