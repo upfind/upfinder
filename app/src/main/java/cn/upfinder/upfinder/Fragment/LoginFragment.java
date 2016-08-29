@@ -22,8 +22,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.upfinder.upfinder.Activity.HomeActivity;
 import cn.upfinder.upfinder.Activity.RegisterActivity;
+import cn.upfinder.upfinder.Activity.SplashActivity;
 import cn.upfinder.upfinder.Contract.LoginContract;
 import cn.upfinder.upfinder.R;
+import cn.upfinder.upfinder.Utils.SharePreferencesUtil;
 
 /**
  * Created by Upfinder on 2016/7/17 0017.
@@ -85,6 +87,7 @@ public class LoginFragment extends Fragment implements LoginContract.View {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        SharePreferencesUtil.putString(getActivity(), SplashActivity.IS_FIRST, SplashActivity.NO_FIRST);
     }
 
     @Override
