@@ -28,7 +28,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private Context context;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +54,10 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-
             }
         }, 1000);
 
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

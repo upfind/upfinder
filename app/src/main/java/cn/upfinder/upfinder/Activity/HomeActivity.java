@@ -192,10 +192,12 @@ public class HomeActivity extends AppCompatActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 switch (v.getId()) {
                     case R.id.tvGroupChat:
                     case R.id.tvScan:
+                        Intent intent = new Intent(context, QRCodeActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.tvAddPerson:
                     case R.id.tvHelp:
                         ToastUtil.showShort(context, "稍后完善！");

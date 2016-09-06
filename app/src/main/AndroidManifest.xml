@@ -102,11 +102,13 @@
         </activity>
         <activity android:name=".Activity.BlurImageActivity">
         </activity>
-        <activity android:name=".Activity.WelcomeActivity"
-                  android:label="@string/app_name"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/AppTheme.Splash.Fullscreen"
-            >
+        <activity
+            android:name=".Activity.WelcomeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Splash.Fullscreen">
+        </activity>
+        <activity android:name=".Activity.QRCodeActivity">
         </activity>
     </application>
 
