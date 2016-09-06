@@ -110,6 +110,8 @@
         </activity>
         <activity android:name=".Activity.QRCodeActivity">
         </activity>
+        <activity android:name=".Activity.PictureActivity">
+        </activity>
     </application>
 
 </manifest>

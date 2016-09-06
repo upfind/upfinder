@@ -19,7 +19,7 @@ public interface CountContract {
         void toEditCountInfo();
 
         //展示用户头像大图
-        void showCountUserLogo();
+        void showCountUserLogo(User user);
 
         //退出登陆后跳转至登录界面
         void jumpToLoginActivity();
@@ -32,5 +32,8 @@ public interface CountContract {
 
         //退出登录
         void logOut();
+
+        //查看头像
+        void jumpToPicture();
     }
 }

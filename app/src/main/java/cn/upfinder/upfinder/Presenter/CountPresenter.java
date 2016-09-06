@@ -12,6 +12,7 @@ public class CountPresenter implements CountContract.Presenter {
 
 
     private CountContract.View countView;
+    private User user;
 
     public CountPresenter(CountContract.View countView) {
         this.countView = countView;
@@ -20,8 +21,7 @@ public class CountPresenter implements CountContract.Presenter {
 
     @Override
     public void start() {
-
-        User user = UserModel.getInstance().getLocalUser();
+        user = UserModel.getInstance().getLocalUser();
         countView.showCountInfo(user);
     }
 
@@ -34,5 +34,10 @@ public class CountPresenter implements CountContract.Presenter {
     public void logOut() {
         UserModel.getInstance().logOut();
         countView.jumpToLoginActivity();
+    }
+
+    @Override
+    public void jumpToPicture() {
+        countView.showCountUserLogo(user);
     }
 }

@@ -53,7 +53,6 @@ public class ReceiveImageHolder extends BaseViewHolder<BmobIMMessage> {
         Glide.with(context)
                 .load(imageMessage.getRemoteUrl())
                 .into(ivMsgContent)
-
                 .onLoadFailed(new Exception("加载失败"), context.getDrawable(R.drawable.ic_photo_loading));
 
         String avatarUri = message.getBmobIMConversation().getConversationIcon();

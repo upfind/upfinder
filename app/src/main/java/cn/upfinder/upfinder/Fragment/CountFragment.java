@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import cn.upfinder.upfinder.Activity.BlurImageActivity;
 import cn.upfinder.upfinder.Activity.EditCountInfoActivity;
 import cn.upfinder.upfinder.Activity.LoginActivity;
+import cn.upfinder.upfinder.Activity.PictureActivity;
 import cn.upfinder.upfinder.Contract.CountContract;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
@@ -109,8 +110,10 @@ public class CountFragment extends Fragment implements CountContract.View {
     }
 
     @Override
-    public void showCountUserLogo() {
+    public void showCountUserLogo(User user) {
 
+        Intent intent = PictureActivity.newIntent(getContext(), user.getAvatar(), user.getNick());
+        startActivity(intent);
     }
 
     @Override
@@ -124,7 +127,7 @@ public class CountFragment extends Fragment implements CountContract.View {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivCountUserLogo:
-                showCountUserLogo();
+                presenter.jumpToPicture();
                 break;
             case R.id.ivCountUserQR:
                 break;

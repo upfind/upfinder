@@ -34,6 +34,7 @@ import cn.bmob.newim.bean.BmobIMConversation;
 import cn.bmob.newim.bean.BmobIMMessage;
 import cn.upfinder.upfinder.Activity.PhotoPickerActivity;
 import cn.upfinder.upfinder.Adapter.ChatAdapter;
+import cn.upfinder.upfinder.Adapter.OnRecyclerViewListener;
 import cn.upfinder.upfinder.Contract.ChatContract;
 import cn.upfinder.upfinder.R;
 import cn.upfinder.upfinder.Utils.OtherUtil;
@@ -240,6 +241,19 @@ public class ChatFragment extends Fragment implements ChatContract.View {
                 swRefresh.setRefreshing(true);
                 //自动刷新
                 presenter.queryMessages(null);
+            }
+        });
+
+        adapter.setOnRecyclerViewListener(new OnRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position) {
+                ToastUtil.showShort(getContext(), "单击Item");
+            }
+
+            @Override
+            public boolean onItemLongClick(int position) {
+                ToastUtil.showShort(getContext(), "长按Item");
+                return false;
             }
         });
 
