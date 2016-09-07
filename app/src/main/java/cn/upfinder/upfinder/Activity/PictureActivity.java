@@ -38,6 +38,8 @@ public class PictureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture);
         ButterKnife.bind(this);
         parseIntent();
+        //动画相关
+        ViewCompat.setTransitionName(ivPicture,TRANSIT_PIC);
         Glide.with(this)
                 .load(imageUrl)
                 .error(R.drawable.ic_photo_loading)

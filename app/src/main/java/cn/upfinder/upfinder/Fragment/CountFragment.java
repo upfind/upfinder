@@ -4,6 +4,8 @@ package cn.upfinder.upfinder.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,9 +113,17 @@ public class CountFragment extends Fragment implements CountContract.View {
 
     @Override
     public void showCountUserLogo(User user) {
-
+        //动画相关
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), ivCountUserLogo, PictureActivity.TRANSIT_PIC);
         Intent intent = PictureActivity.newIntent(getContext(), user.getAvatar(), user.getNick());
-        startActivity(intent);
+
+        try {
+            ActivityCompat.startActivity(getActivity(), intent, optionsCompat.toBundle());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            startActivity(intent);
+        }
+
     }
 
     @Override
@@ -127,6 +137,7 @@ public class CountFragment extends Fragment implements CountContract.View {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivCountUserLogo:
+
                 presenter.jumpToPicture();
                 break;
             case R.id.ivCountUserQR:
