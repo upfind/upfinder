@@ -112,6 +112,8 @@
         </activity>
         <activity android:name=".Activity.PictureActivity">
         </activity>
+        <activity android:name=".Activity.WebActivity">
+        </activity>
     </application>
 
 </manifest>

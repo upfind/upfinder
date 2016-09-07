@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import cn.upfinder.upfinder.Activity.BlurImageActivity;
 import cn.upfinder.upfinder.Activity.EditCountInfoActivity;
 import cn.upfinder.upfinder.Activity.LoginActivity;
 import cn.upfinder.upfinder.Activity.PictureActivity;
+import cn.upfinder.upfinder.Activity.WebActivity;
 import cn.upfinder.upfinder.Contract.CountContract;
 import cn.upfinder.upfinder.Model.Bean.User;
 import cn.upfinder.upfinder.R;
@@ -141,6 +143,10 @@ public class CountFragment extends Fragment implements CountContract.View {
                 presenter.jumpToPicture();
                 break;
             case R.id.ivCountUserQR:
+                //测试WebView
+                Intent webIntent = WebActivity.newIntent(getContext(), "http://www.baidu.com", "ceshi");
+                startActivity(webIntent);
+                Log.d(TAG, "onClick: 跳转至网络页面");
                 break;
             case R.id.llCountInfo:
                 toEditCountInfo();
